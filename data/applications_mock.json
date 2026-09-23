@@ -1,0 +1,176 @@
+[
+  {
+    "student_id": "STU001",
+    "student_name": "Aarav Sharma",
+    "branch": "CSE",
+    "cgpa": 9.25,
+    "applications": [
+      {
+        "company_name": "Google",
+        "role": "Software Engineer (SDE-1)",
+        "status": "Interview Scheduled",
+        "applied_date": "2026-09-02",
+        "next_step": "Technical Interview Round 1 on 2026-10-06"
+      },
+      {
+        "company_name": "Microsoft",
+        "role": "Software Engineer (L59)",
+        "status": "Shortlisted",
+        "applied_date": "2026-09-05",
+        "next_step": "Online Coding Assessment on Codility on 2026-09-25"
+      },
+      {
+        "company_name": "Goldman Sachs",
+        "role": "Engineering Analyst",
+        "status": "Applied",
+        "applied_date": "2026-09-12",
+        "next_step": "Awaiting HackerRank assessment link"
+      }
+    ]
+  },
+  {
+    "student_id": "STU002",
+    "student_name": "Priya Patel",
+    "branch": "CSE",
+    "cgpa": 8.42,
+    "applications": [
+      {
+        "company_name": "Amazon",
+        "role": "Software Development Engineer I (SDE-1)",
+        "status": "Shortlisted",
+        "applied_date": "2026-09-04",
+        "next_step": "Complete Work Style Assessment & OA by 2026-09-24"
+      },
+      {
+        "company_name": "Flipkart",
+        "role": "Software Development Engineer I",
+        "status": "Applied",
+        "applied_date": "2026-09-10",
+        "next_step": "Resume screening in progress"
+      },
+      {
+        "company_name": "Deloitte",
+        "role": "Analyst - Technology Consulting",
+        "status": "Selected",
+        "applied_date": "2026-08-20",
+        "next_step": "Offer letter acceptance and onboarding document verification"
+      }
+    ]
+  },
+  {
+    "student_id": "STU003",
+    "student_name": "Rohan Verma",
+    "branch": "ECE",
+    "cgpa": 7.85,
+    "applications": [
+      {
+        "company_name": "Microsoft",
+        "role": "Cloud Solution Architect",
+        "status": "Applied",
+        "applied_date": "2026-09-08",
+        "next_step": "Eligibility screening under review by T&P cell"
+      },
+      {
+        "company_name": "Tata Consultancy Services",
+        "role": "TCS Digital Engineer",
+        "status": "Selected",
+        "applied_date": "2026-08-25",
+        "next_step": "Document submission and verification on TCS iON portal"
+      },
+      {
+        "company_name": "Google",
+        "role": "Software Engineering Intern",
+        "status": "Rejected",
+        "applied_date": "2026-08-15",
+        "next_step": "Application closed after Online Assessment"
+      }
+    ]
+  },
+  {
+    "student_id": "STU004",
+    "student_name": "Ananya Iyer",
+    "branch": "IT",
+    "cgpa": 8.78,
+    "applications": [
+      {
+        "company_name": "Goldman Sachs",
+        "role": "Summer Analyst",
+        "status": "Interview Scheduled",
+        "applied_date": "2026-09-01",
+        "next_step": "Technical Interview Round 2 on 2026-09-22"
+      },
+      {
+        "company_name": "Flipkart",
+        "role": "Associate Product Manager",
+        "status": "Shortlisted",
+        "applied_date": "2026-09-06",
+        "next_step": "Product Case Study submission by 2026-09-26"
+      },
+      {
+        "company_name": "Amazon",
+        "role": "Software Development Engineer I (SDE-1)",
+        "status": "Applied",
+        "applied_date": "2026-09-14",
+        "next_step": "Awaiting Online Assessment invitation email"
+      }
+    ]
+  },
+  {
+    "student_id": "STU005",
+    "student_name": "Vikram Malhotra",
+    "branch": "ME",
+    "cgpa": 6.90,
+    "applications": [
+      {
+        "company_name": "Tata Consultancy Services",
+        "role": "TCS Ninja",
+        "status": "Interview Scheduled",
+        "applied_date": "2026-08-28",
+        "next_step": "Technical & HR Interview on 2026-09-24"
+      },
+      {
+        "company_name": "Deloitte",
+        "role": "Analyst - Technology Consulting",
+        "status": "Shortlisted",
+        "applied_date": "2026-09-03",
+        "next_step": "Group Discussion Round on 2026-09-29"
+      },
+      {
+        "company_name": "Accenture",
+        "role": "Associate Software Engineer",
+        "status": "Applied",
+        "applied_date": "2026-09-15",
+        "next_step": "National test slot booking pending"
+      }
+    ]
+  },
+  {
+    "student_id": "STU006",
+    "student_name": "Sneha Kulkarni",
+    "branch": "EEE",
+    "cgpa": 7.35,
+    "applications": [
+      {
+        "company_name": "Accenture",
+        "role": "Advanced Associate Software Engineer",
+        "status": "Shortlisted",
+        "applied_date": "2026-09-07",
+        "next_step": "Cognitive & Technical Assessment on 2026-09-23"
+      },
+      {
+        "company_name": "Infosys",
+        "role": "Digital Specialist Engineer (DSE)",
+        "status": "Applied",
+        "applied_date": "2026-09-11",
+        "next_step": "InfyTQ test score verification pending"
+      },
+      {
+        "company_name": "Wipro",
+        "role": "Project Engineer",
+        "status": "Rejected",
+        "applied_date": "2026-08-18",
+        "next_step": "Did not meet technical aptitude sectional cutoff"
+      }
+    ]
+  }
+]

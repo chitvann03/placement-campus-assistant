@@ -1,0 +1,153 @@
+[
+  {
+    "company_name": "Google",
+    "min_cgpa": 8.0,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE"
+    ],
+    "max_backlogs_allowed": 0,
+    "package_lpa": 45.0,
+    "bond_years": 0,
+    "other_requirements": "Minimum 75% in Class 10th and 12th. Strong problem-solving proficiency in Data Structures and Algorithms. No active backlogs."
+  },
+  {
+    "company_name": "Microsoft",
+    "min_cgpa": 7.5,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE"
+    ],
+    "max_backlogs_allowed": 0,
+    "package_lpa": 42.0,
+    "bond_years": 0,
+    "other_requirements": "Strong foundation in Computer Science fundamentals (OS, DBMS, Computer Networks, OOPS). Maximum 1 year education gap permitted."
+  },
+  {
+    "company_name": "Amazon",
+    "min_cgpa": 7.0,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME"
+    ],
+    "max_backlogs_allowed": 0,
+    "package_lpa": 38.0,
+    "bond_years": 0,
+    "other_requirements": "Demonstrated alignment with Amazon Leadership Principles. Strong coding capabilities and object-oriented design skills. No active backlogs."
+  },
+  {
+    "company_name": "Goldman Sachs",
+    "min_cgpa": 7.5,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "max_backlogs_allowed": 0,
+    "package_lpa": 32.0,
+    "bond_years": 0,
+    "other_requirements": "High quantitative aptitude, discrete mathematics, and analytical problem-solving skills. Willingness to work in high-speed financial systems."
+  },
+  {
+    "company_name": "Flipkart",
+    "min_cgpa": 7.5,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE"
+    ],
+    "max_backlogs_allowed": 0,
+    "package_lpa": 30.0,
+    "bond_years": 0,
+    "other_requirements": "Proficiency in Java/C++/Python, solid understanding of distributed systems, databases, and high-performance algorithms."
+  },
+  {
+    "company_name": "Deloitte",
+    "min_cgpa": 6.5,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "max_backlogs_allowed": 0,
+    "package_lpa": 9.0,
+    "bond_years": 0,
+    "other_requirements": "Minimum 60% throughout 10th, 12th, and graduation. Excellent analytical, business consulting, and interpersonal communication skills."
+  },
+  {
+    "company_name": "Accenture",
+    "min_cgpa": 6.5,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "max_backlogs_allowed": 0,
+    "package_lpa": 8.5,
+    "bond_years": 1,
+    "other_requirements": "Minimum 65% aggregate across all completed semesters. No standing backlogs at the time of the hiring process. Service agreement of 1 year."
+  },
+  {
+    "company_name": "Tata Consultancy Services",
+    "min_cgpa": 6.0,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "max_backlogs_allowed": 1,
+    "package_lpa": 7.2,
+    "bond_years": 1,
+    "other_requirements": "Minimum 60% aggregate in 10th, 12th, and Diploma/Degree. Up to 1 active backlog permitted during assessment but cleared prior to onboarding. 1-year service commitment."
+  },
+  {
+    "company_name": "Infosys",
+    "min_cgpa": 6.0,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "max_backlogs_allowed": 1,
+    "package_lpa": 6.5,
+    "bond_years": 1,
+    "other_requirements": "Minimum 60% or equivalent CGPA in 10th and 12th. Willingness to relocate across India and work in 24/7 shifts if project demands. 1-year bond."
+  },
+  {
+    "company_name": "Wipro",
+    "min_cgpa": 6.0,
+    "allowed_branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "max_backlogs_allowed": 1,
+    "package_lpa": 6.5,
+    "bond_years": 1,
+    "other_requirements": "60% or 6.0 CGPA throughout academic career (10th, 12th, and B.Tech). Maximum 3 years of academic gap allowed. 1-year service agreement."
+  }
+]

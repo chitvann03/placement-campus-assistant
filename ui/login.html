@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlaceMe | Premium Placement Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    :root {
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --bg-main: #f8fafc;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); color: var(--text-main); background: var(--bg-main); display: flex; min-height: 100vh; overflow: hidden; }
+    
+    /* Left Panel - Branding */
+    .hero-panel {
+      flex: 1; background: #0c1222; position: relative; display: none; overflow: hidden; flex-direction: column; justify-content: space-between; padding: 60px;
+    }
+    @media(min-width: 900px) { .hero-panel { display: flex; } }
+    .hero-bg {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.15), transparent 40%),
+                  radial-gradient(circle at bottom left, rgba(79, 70, 229, 0.15), transparent 40%);
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 480px; }
+    .logo { font-family: var(--font-heading); font-size: 24px; color: #fff; display: flex; align-items: center; gap: 12px; margin-bottom: 80px; }
+    .logo i { font-size: 28px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-title { font-family: var(--font-heading); font-size: 48px; line-height: 1.1; color: #fff; margin-bottom: 24px; letter-spacing: -1px; }
+    .hero-subtitle { font-size: 18px; color: #94a3b8; line-height: 1.6; }
+    .hero-stats { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .stat-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 24px; border-radius: 16px; backdrop-filter: blur(10px); }
+    .stat-val { font-family: var(--font-heading); font-size: 32px; color: #fff; margin-bottom: 8px; }
+    .stat-label { font-size: 14px; color: #94a3b8; font-weight: 500; }
+
+    /* Right Panel - Auth */
+    .auth-panel {
+      flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px 24px; position: relative; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.03); z-index: 10;
+    }
+    .auth-container { width: 100%; max-width: 420px; }
+    .mobile-logo { display: flex; font-family: var(--font-heading); font-size: 24px; color: var(--text-main); align-items: center; gap: 10px; margin-bottom: 32px; justify-content: center; }
+    @media(min-width: 900px) { .mobile-logo { display: none; } }
+    .mobile-logo i { color: var(--primary); }
+    
+    .auth-header { margin-bottom: 32px; }
+    .auth-title { font-family: var(--font-heading); font-size: 30px; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .auth-subtitle { color: var(--text-muted); font-size: 15px; }
+
+    .tabs { display: flex; background: var(--bg-main); padding: 4px; border-radius: 12px; margin-bottom: 32px; }
+    .tab { flex: 1; padding: 10px; text-align: center; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 8px; color: var(--text-muted); transition: all 0.2s; }
+    .tab.active { background: #fff; color: var(--text-main); box-shadow: var(--shadow-sm); }
+
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+    .form-input {
+      width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+      font-family: var(--font-body); font-size: 15px; color: var(--text-main); background: #fff;
+      transition: all 0.2s; outline: none;
+    }
+    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+    .form-input::placeholder { color: #94a3b8; }
+    
+    .btn {
+      width: 100%; padding: 14px; background: var(--primary-gradient); color: #fff; border: none;
+      border-radius: 10px; font-family: var(--font-body); font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    
+    .btn-outline {
+      background: transparent; color: var(--text-main); border: 1px solid var(--border); margin-top: 16px;
+    }
+    .btn-outline:hover { background: var(--bg-main); box-shadow: none; transform: none; border-color: #cbd5e1; }
+
+    .error-msg { color: #ef4444; font-size: 13px; margin-top: 6px; display: none; display: flex; align-items: center; gap: 4px; }
+    
+    .spinner {
+      width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%;
+      border-top-color: #fff; animation: spin 0.8s linear infinite; display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success overlay */
+    .success-overlay {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(5px); z-index: 50; display: none; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .success-icon { font-size: 48px; color: #10b981; margin-bottom: 16px; animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+  </style>
+</head>
+<body>
+
+  <!-- Left Branding Panel -->
+  <div class="hero-panel">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="logo">
+        <i class="ri-briefcase-4-fill"></i> PlaceMe
+      </div>
+      <h1 class="hero-title">Accelerate Your Career Trajectory.</h1>
+      <p class="hero-subtitle">The enterprise-grade platform connecting top engineering talent with global technology leaders.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-val">50+</div>
+        <div class="stat-label">Partner Companies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">45LPA</div>
+        <div class="stat-label">Highest Package</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Auth Panel -->
+  <div class="auth-panel">
+    <div class="success-overlay" id="login-success">
+      <i class="ri-checkbox-circle-fill success-icon"></i>
+      <h2 style="font-family:var(--font-heading);font-size:24px;">Authentication Successful</h2>
+      <p style="color:var(--text-muted);margin-top:8px;">Redirecting to dashboard...</p>
+    </div>
+
+    <div class="auth-container">
+      <div class="mobile-logo"><i class="ri-briefcase-4-fill"></i> PlaceMe</div>
+      
+      <div class="auth-header">
+        <h2 class="auth-title" id="form-title">Welcome back</h2>
+        <p class="auth-subtitle" id="form-subtitle">Enter your credentials to access your portal</p>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('login')" id="tab-login">Sign In</div>
+        <div class="tab" onclick="switchTab('register')" id="tab-register">Register</div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Email or Student ID</label>
+          <input type="text" class="form-input" id="login-email" placeholder="name@college.edu" />
+          <div class="error-msg" id="email-err"><i class="ri-error-warning-line"></i> Required field</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" id="login-pass" placeholder="••••••••" />
+          <div class="error-msg" id="pass-err"><i class="ri-error-warning-line"></i> Invalid credentials</div>
+        </div>
+        <button type="submit" class="btn" id="login-btn">
+          <span id="login-btn-text">Sign In</span>
+          <div class="spinner" id="login-spinner"></div>
+        </button>
+        <button type="button" class="btn btn-outline" onclick="demoLogin()">
+          <i class="ri-flashlight-line"></i> Quick Demo Login
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" style="display:none;" onsubmit="handleRegister(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" id="reg-fname" placeholder="First Name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" id="reg-lname" placeholder="Last Name" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" id="reg-email" placeholder="name@college.edu" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Student ID</label>
+            <input type="text" class="form-input" id="reg-id" placeholder="STU007" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Branch</label>
+            <select class="form-input" id="reg-branch" required>
+              <option value="CSE">CSE</option>
+              <option value="IT">IT</option>
+              <option value="ECE">ECE</option>
+              <option value="EEE">EEE</option>
+              <option value="ME">ME</option>
+              <option value="CE">CE</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current CGPA</label>
+          <input type="number" step="0.01" min="0" max="10" class="form-input" id="reg-cgpa" placeholder="e.g. 8.5" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" id="reg-pass" placeholder="Create a password" required minlength="6" />
+        </div>
+        <button type="submit" class="btn" id="reg-btn">
+          <span id="reg-btn-text">Create Account</span>
+          <div class="spinner" id="reg-spinner"></div>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Demo User Data
+    const DEMO_USERS = [
+      { id: 'STU001', name: 'Demo Student', branch: 'CSE', cgpa: 8.5, email: 'demo@college.edu', password: 'demo' }
+    ];
+
+    function switchTab(tab) {
+      document.getElementById('tab-login').className = tab === 'login' ? 'tab active' : 'tab';
+      document.getElementById('tab-register').className = tab === 'register' ? 'tab active' : 'tab';
+      document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+      document.getElementById('register-form').style.display = tab === 'register' ? 'block' : 'none';
+      document.getElementById('form-title').textContent = tab === 'login' ? 'Welcome back' : 'Create an account';
+      document.getElementById('form-subtitle').textContent = tab === 'login' ? 'Enter your credentials to access your portal' : 'Join the platform to track your placements';
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const pass = document.getElementById('login-pass').value.trim();
+
+      document.getElementById('email-err').style.display = 'none';
+      document.getElementById('pass-err').style.display = 'none';
+
+      if (!email) { document.getElementById('email-err').style.display = 'flex'; return; }
+      if (!pass) { document.getElementById('pass-err').style.display = 'flex'; return; }
+
+      const btn = document.getElementById('login-btn');
+      const text = document.getElementById('login-btn-text');
+      const spinner = document.getElementById('login-spinner');
+      btn.disabled = true; text.style.display = 'none'; spinner.style.display = 'block';
+
+      setTimeout(() => {
+        let foundUser = null;
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key.startsWith('placeme_registered_')) {
+            try {
+              const u = JSON.parse(localStorage.getItem(key));
+              if ((u.email === email || u.id.toLowerCase() === email.toLowerCase()) && u.password === pass) {
+                foundUser = u; break;
+              }
+            } catch(e) {}
+          }
+        }
+        if (!foundUser) {
+          foundUser = DEMO_USERS.find(u => (u.email === email || u.id.toLowerCase() === email.toLowerCase()) && u.password === pass);
+        }
+
+        if (foundUser) {
+          sessionStorage.setItem('placeme_user', JSON.stringify(foundUser));
+          if (!sessionStorage.getItem('placeme_applications')) {
+            sessionStorage.setItem('placeme_applications', JSON.stringify([]));
+          }
+          document.getElementById('login-success').style.display = 'flex';
+          setTimeout(() => { window.location.href = 'dashboard.html'; }, 1000);
+        } else {
+          document.getElementById('pass-err').style.display = 'flex';
+          btn.disabled = false; text.style.display = 'inline'; spinner.style.display = 'none';
+        }
+      }, 1000);
+    }
+
+    function demoLogin() {
+      sessionStorage.setItem('placeme_user', JSON.stringify(DEMO_USERS[0]));
+      if (!sessionStorage.getItem('placeme_applications')) {
+        sessionStorage.setItem('placeme_applications', JSON.stringify([]));
+      }
+      window.location.href = 'dashboard.html';
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const fname = document.getElementById('reg-fname').value.trim();
+      const lname = document.getElementById('reg-lname').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const id = document.getElementById('reg-id').value.trim();
+      const branch = document.getElementById('reg-branch').value;
+      const cgpa = parseFloat(document.getElementById('reg-cgpa').value);
+      const pass = document.getElementById('reg-pass').value;
+
+      const btn = document.getElementById('reg-btn');
+      const text = document.getElementById('reg-btn-text');
+      const spinner = document.getElementById('reg-spinner');
+      btn.disabled = true; text.style.display = 'none'; spinner.style.display = 'block';
+
+      setTimeout(() => {
+        const userData = { id, name: fname + ' ' + lname, email, branch, cgpa, password: pass };
+        localStorage.setItem('placeme_registered_' + id, JSON.stringify(userData));
+        sessionStorage.setItem('placeme_user', JSON.stringify(userData));
+        sessionStorage.setItem('placeme_applications', JSON.stringify([]));
+        
+        document.getElementById('login-success').style.display = 'flex';
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 1000);
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

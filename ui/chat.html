@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlaceMe | AI Copilot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <style>
+    .chat-wrapper { margin-left: var(--sidebar-width); height: 100vh; display: flex; flex-direction: column; }
+    .chat-header {
+      height: var(--topbar-height); background: var(--bg-surface); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 32px; flex-shrink: 0;
+    }
+    .chat-title-area { display: flex; align-items: center; gap: 16px; }
+    .ai-icon-large { width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--primary-gradient); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+    .ai-title { font-family: var(--font-heading); font-size: 18px; line-height: 1.2; }
+    .ai-sub { font-size: 12px; color: var(--text-muted); }
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .clear-btn { background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 8px 14px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--text-muted); transition: all 0.2s; font-family: var(--font-body); display: flex; align-items: center; gap: 6px; }
+    .clear-btn:hover { background: var(--danger-bg); color: var(--danger); border-color: var(--danger); }
+
+    /* API Indicator Badge */
+    .api-indicator { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; cursor: pointer; padding: 7px 14px; border: 1px solid var(--border); border-radius: var(--radius-full); transition: all 0.2s; color: var(--text-muted); }
+    .api-indicator:hover { background: var(--bg-app); }
+    .api-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .api-dot.live { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); animation: apipulse 2s infinite; }
+    .api-dot.demo { background: #f59e0b; }
+    @keyframes apipulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* Settings Overlay */
+    .settings-overlay { position: fixed; inset: 0; background: rgba(15,23,42,0.65); backdrop-filter: blur(6px); z-index: 1000; display: none; align-items: center; justify-content: center; }
+    .settings-overlay.open { display: flex; }
+    .settings-modal { background: #fff; border-radius: var(--radius-lg); padding: 36px; width: 100%; max-width: 500px; box-shadow: 0 24px 48px rgba(0,0,0,0.2); }
+    .settings-title { font-family: var(--font-heading); font-size: 22px; margin-bottom: 6px; }
+    .settings-subtitle { color: var(--text-muted); font-size: 14px; line-height: 1.5; margin-bottom: 28px; }
+    .settings-group { margin-bottom: 20px; }
+    .settings-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+    .settings-input { width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-body); font-size: 14px; color: var(--text-main); outline: none; transition: border 0.2s; }
+    .settings-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+    .settings-note { font-size: 12px; color: var(--text-muted); margin-top: 6px; display: flex; align-items: center; gap: 4px; }
+    .settings-status { padding: 10px 14px; border-radius: var(--radius-md); font-size: 13px; font-weight: 500; margin-bottom: 20px; display: none; }
+    .settings-status.success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; display: block; }
+    .settings-status.error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block; }
+    .settings-btns { display: flex; gap: 12px; }
+    .btn-primary-sm { padding: 11px 20px; background: var(--primary-gradient); color: #fff; border: none; border-radius: var(--radius-md); font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: transform 0.2s; }
+    .btn-primary-sm:hover { transform: translateY(-1px); }
+    .btn-ghost-sm { padding: 11px 20px; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-body); font-size: 14px; cursor: pointer; color: var(--text-muted); }
+    .settings-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    .settings-clear-btn { width: 100%; padding: 10px; background: transparent; border: 1px dashed #fca5a5; border-radius: var(--radius-md); color: var(--danger); font-family: var(--font-body); font-size: 13px; cursor: pointer; transition: background 0.2s; }
+    .settings-clear-btn:hover { background: #fee2e2; }
+
+    /* Chat Body */
+    .chat-body { flex: 1; overflow-y: auto; padding: 32px; background: var(--bg-app); display: flex; flex-direction: column; gap: 24px; scroll-behavior: smooth; }
+    .chat-body::-webkit-scrollbar { width: 4px; }
+    .chat-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+    .msg-row { display: flex; gap: 14px; max-width: 820px; animation: msgIn 0.25s ease; }
+    .msg-row.user { align-self: flex-end; flex-direction: row-reverse; }
+    @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .msg-avatar { width: 36px; height: 36px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+    .msg-avatar.ai-av { background: var(--primary); color: #fff; }
+    .msg-avatar.user-av { background: var(--secondary); color: #fff; }
+
+    .msg-content { max-width: 85%; }
+    .msg-sender { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px; }
+    .user .msg-sender { text-align: right; }
+
+    .msg-bubble { padding: 16px 20px; border-radius: var(--radius-lg); font-size: 14px; line-height: 1.65; }
+    .user .msg-bubble { background: var(--primary); color: #fff; border-top-right-radius: 4px; box-shadow: var(--shadow-sm); }
+    .ai .msg-bubble  { background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border); border-top-left-radius: 4px; box-shadow: var(--shadow-sm); }
+
+    .msg-time { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+    .user .msg-time { text-align: right; }
+
+    /* Rich content cards inside AI messages */
+    .ai-card { background: var(--bg-app); border-left: 3px solid var(--primary); padding: 14px 16px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: 12px 0; }
+    .ai-card-title { font-weight: 700; font-size: 13px; color: var(--text-main); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+    .ai .msg-bubble p { margin-bottom: 10px; }
+    .ai .msg-bubble p:last-child { margin-bottom: 0; }
+    .ai .msg-bubble ul { margin: 8px 0 10px 18px; }
+    .ai .msg-bubble li { margin-bottom: 4px; }
+    .ai .msg-bubble strong { color: var(--text-main); }
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600; }
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-danger  { background: #fee2e2; color: #991b1b; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+
+    /* Error notice inside chat */
+    .api-error-notice { background: #fff7ed; border: 1px solid #fed7aa; border-radius: var(--radius-md); padding: 14px 16px; font-size: 13px; color: #9a3412; display: flex; gap: 10px; align-items: flex-start; }
+    .api-error-notice i { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    /* Typing dots */
+    .typing-dots { display: flex; gap: 4px; align-items: center; padding: 4px 0; }
+    .t-dot { width: 7px; height: 7px; background: #94a3b8; border-radius: 50%; animation: bounce 1.4s infinite; }
+    .t-dot:nth-child(2) { animation-delay: 0.2s; }
+    .t-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%,80%,100%{transform:scale(0.6);opacity:0.5} 40%{transform:scale(1);opacity:1;background:var(--primary)} }
+
+    /* Footer / Input */
+    .chat-footer { padding: 20px 32px 24px; background: var(--bg-surface); border-top: 1px solid var(--border); flex-shrink: 0; }
+    .quick-chips { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 16px; padding-bottom: 2px; scrollbar-width: none; }
+    .quick-chips::-webkit-scrollbar { display: none; }
+    .chip { padding: 7px 14px; background: var(--bg-app); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 13px; font-weight: 500; cursor: pointer; color: var(--text-main); white-space: nowrap; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+    .chip:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .input-wrapper { display: flex; gap: 12px; align-items: flex-end; }
+    .chat-input { flex: 1; min-height: 52px; max-height: 150px; padding: 14px 20px; background: var(--bg-app); border: 1px solid var(--border); border-radius: var(--radius-lg); font-family: var(--font-body); font-size: 14px; outline: none; resize: none; line-height: 1.5; transition: border 0.2s, background 0.2s; }
+    .chat-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); background: #fff; }
+    .send-btn { width: 52px; height: 52px; border-radius: var(--radius-lg); background: var(--primary-gradient); border: none; color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.2s, box-shadow 0.2s; }
+    .send-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .send-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    @media (max-width: 900px) {
+      .chat-wrapper { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- API credentials — edit config.js -->
+  <script src="config.js"></script>
+
+  <!-- Settings Modal -->
+  <div class="settings-overlay" id="settings-overlay" onclick="if(event.target===this)closeSettings()">
+    <div class="settings-modal">
+      <h2 class="settings-title"><i class="ri-key-2-line" style="color:var(--primary)"></i> Azure AI Configuration</h2>
+      <p class="settings-subtitle">
+        Connect to your <strong>Azure AI Foundry</strong> deployment.<br>
+        Get endpoint from: <strong>ai.azure.com → Your Project → Overview → Project endpoint</strong>
+      </p>
+
+      <div class="settings-status" id="settings-status"></div>
+
+      <div class="settings-group">
+        <label class="settings-label">Azure AI Project Endpoint</label>
+        <input type="text" class="settings-input" id="cfg-endpoint" placeholder="https://placement-hub.services.ai.azure.com/api/projects/Campus_Placement_Assistant" />
+        <div class="settings-note"><i class="ri-information-line"></i> Paste the full <strong>Project endpoint</strong> exactly as shown in Foundry (include /api/projects/...)</div>
+      </div>
+      <div class="settings-group">
+        <label class="settings-label">Deployment Name</label>
+        <input type="text" class="settings-input" id="cfg-deployment" placeholder="gpt-5-mini" value="gpt-5-mini" />
+        <div class="settings-note"><i class="ri-information-line"></i> The name you gave when deploying the model</div>
+      </div>
+      <div class="settings-group">
+        <label class="settings-label">API Key</label>
+        <input type="password" class="settings-input" id="cfg-apikey" placeholder="••••••••••••••••••••" autocomplete="off" />
+        <div class="settings-note"><i class="ri-information-line"></i> Azure Foundry → Settings → Keys → Primary key</div>
+      </div>
+
+      <div class="settings-btns">
+        <button class="btn-primary-sm" onclick="saveAndTest()"><i class="ri-flashlight-fill"></i> Save & Test</button>
+        <button class="btn-ghost-sm" onclick="closeSettings()">Cancel</button>
+      </div>
+
+      <hr class="settings-divider" />
+      <button class="settings-clear-btn" onclick="clearApiSettings()"><i class="ri-delete-bin-line"></i> Remove API Settings (use demo mode)</button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo-icon"><i class="ri-briefcase-4-fill"></i></div>
+      <div class="sidebar-logo-text">PlaceMe</div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-label-group">Platform</div>
+      <a href="dashboard.html" class="nav-item"><i class="ri-dashboard-line"></i> Dashboard</a>
+      <a href="dashboard.html" class="nav-item" onclick="sessionStorage.setItem('placeme_page','drives')"><i class="ri-building-4-line"></i> Campus Drives</a>
+      <a href="dashboard.html" class="nav-item" onclick="sessionStorage.setItem('placeme_page','eligibility')"><i class="ri-focus-2-line"></i> Eligibility Matrix</a>
+      <a href="dashboard.html" class="nav-item" onclick="sessionStorage.setItem('placeme_page','tracker')"><i class="ri-kanban-view"></i> Applications</a>
+      <div class="nav-label-group">Preparation</div>
+      <a href="dashboard.html" class="nav-item" onclick="sessionStorage.setItem('placeme_page','resume')"><i class="ri-file-paper-2-line"></i> Resume Builder</a>
+      <a href="dashboard.html" class="nav-item" onclick="sessionStorage.setItem('placeme_page','interview')"><i class="ri-lightbulb-flash-line"></i> Interview Prep</a>
+      <div class="nav-label-group">AI Assistance</div>
+      <a href="chat.html" class="nav-item active"><i class="ri-robot-2-line"></i> AI Copilot <span class="nav-badge-ai">GPT-5</span></a>
+    </div>
+    <div class="sidebar-footer">
+      <button class="user-profile-btn" onclick="logout()">
+        <div class="user-avatar" id="sidebar-avatar">U</div>
+        <div class="user-info">
+          <div class="user-name" id="sidebar-name">User</div>
+          <div class="user-role" id="sidebar-branch">—</div>
+        </div>
+        <i class="ri-logout-box-r-line"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Chat Layout -->
+  <div class="chat-wrapper">
+    <header class="chat-header">
+      <div class="chat-title-area">
+        <div class="ai-icon-large"><i class="ri-robot-2-line"></i></div>
+        <div>
+          <h1 class="ai-title">PlaceMe Copilot</h1>
+          <div class="ai-sub" id="ai-sub-text">Powered by Azure AI Foundry</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="api-indicator" id="api-status-badge" onclick="openSettings()" title="Configure Azure API">
+          <span class="api-dot demo" id="api-dot"></span>
+          <span id="api-status-text">Demo Mode</span>
+          <i class="ri-settings-3-line"></i>
+        </div>
+        <button class="clear-btn" onclick="clearChat()"><i class="ri-delete-bin-line"></i> Clear</button>
+      </div>
+    </header>
+
+    <div class="chat-body" id="chat-body"></div>
+
+    <footer class="chat-footer">
+      <div class="quick-chips">
+        <div class="chip" onclick="sendMsg('Am I eligible for Google based on my CGPA and branch?')"><i class="ri-search-eye-line"></i> Check My Eligibility</div>
+        <div class="chip" onclick="sendMsg('What are the upcoming placement drives this month?')"><i class="ri-calendar-check-line"></i> Upcoming Drives</div>
+        <div class="chip" onclick="sendMsg('Give me a detailed interview preparation guide for Amazon')"><i class="ri-lightbulb-line"></i> Amazon Interview Prep</div>
+        <div class="chip" onclick="sendMsg('How do I write an ATS-optimized resume as a CSE student?')"><i class="ri-file-text-line"></i> Resume Tips</div>
+        <div class="chip" onclick="sendMsg('What is my application status?')"><i class="ri-file-list-3-line"></i> My Applications</div>
+      </div>
+      <div class="input-wrapper">
+        <textarea
+          class="chat-input"
+          id="chat-input"
+          placeholder="Ask about eligibility, drives, interview prep, resume..."
+          rows="1"
+          oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,150)+'px'"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"
+        ></textarea>
+        <button class="send-btn" id="send-btn" onclick="sendMsg()">
+          <i class="ri-send-plane-fill"></i>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+<script>
+// ── Auth ──
+const user = JSON.parse(sessionStorage.getItem('placeme_user') || 'null');
+if (!user) window.location.href = 'login.html';
+
+function logout() {
+  sessionStorage.removeItem('placeme_user');
+  sessionStorage.removeItem('placeme_applications');
+  window.location.href = 'login.html';
+}
+
+// ── User setup ──
+document.getElementById('sidebar-name').textContent = user.name || 'Student';
+document.getElementById('sidebar-branch').textContent = `${user.branch || 'CSE'} • ${user.cgpa || '—'} CGPA`;
+document.getElementById('sidebar-avatar').textContent = (user.name || 'U').charAt(0);
+
+// ── API Config — reads from config.js first, localStorage as override ──
+const CFG_KEY = 'placeme_azure_cfg';
+
+function getConfig() {
+  // 1. Check if config.js has values filled in
+  if (typeof PLACEME_CONFIG !== 'undefined' &&
+      PLACEME_CONFIG.AZURE_ENDPOINT && PLACEME_CONFIG.AZURE_API_KEY) {
+    return {
+      endpoint:   PLACEME_CONFIG.AZURE_ENDPOINT,
+      deployment: PLACEME_CONFIG.AZURE_DEPLOYMENT || 'gpt-5-mini',
+      apiKey:     PLACEME_CONFIG.AZURE_API_KEY
+    };
+  }
+  // 2. Fall back to localStorage (from settings modal)
+  return JSON.parse(localStorage.getItem(CFG_KEY) || 'null');
+}
+function saveConfig(cfg) { localStorage.setItem(CFG_KEY, JSON.stringify(cfg)); }
+function clearApiSettings() {
+  localStorage.removeItem(CFG_KEY);
+  updateApiBadge();
+  closeSettings();
+  addSystemMsg('API settings cleared. Running in demo mode. <a href="#" onclick="openSettings();return false;" style="color:var(--primary);font-weight:600;">Configure API →</a>');
+}
+
+function updateApiBadge() {
+  const cfg = getConfig();
+  const dot = document.getElementById('api-dot');
+  const txt = document.getElementById('api-status-text');
+  const sub = document.getElementById('ai-sub-text');
+  if (cfg && cfg.endpoint && cfg.apiKey) {
+    // Resolve the actual hub base (strip /api/projects/...)
+    let base = cfg.endpoint.replace(/\/+$/, '');
+    const projIdx = base.indexOf('/api/projects/');
+    if (projIdx !== -1) base = base.substring(0, projIdx);
+
+    dot.className = 'api-dot live';
+    txt.textContent = 'Live · ' + (cfg.deployment || 'gpt-5-mini');
+    sub.textContent = 'Azure AI Foundry — ' + base.replace('https://', '');
+  } else {
+    dot.className = 'api-dot demo';
+    txt.textContent = 'Demo Mode';
+    sub.textContent = 'Using built-in mock responses — click to connect API';
+  }
+}
+
+// ── Settings Panel ──
+function openSettings() {
+  const cfg = getConfig() || {};
+  document.getElementById('cfg-endpoint').value = cfg.endpoint || '';
+  document.getElementById('cfg-deployment').value = cfg.deployment || 'gpt-5-mini';
+  document.getElementById('cfg-apikey').value = cfg.apiKey || '';
+  document.getElementById('settings-status').className = 'settings-status';
+  document.getElementById('settings-overlay').classList.add('open');
+}
+function closeSettings() {
+  document.getElementById('settings-overlay').classList.remove('open');
+}
+
+// ── Build the correct Azure API URL ──
+// Azure has two endpoint types — both handled here:
+//
+//  Type A  (AI Foundry project)  →  https://placement-hub.services.ai.azure.com/api/projects/Campus_Placement_Assistant
+//  Type B  (Azure OpenAI hub)    →  https://placement-hub.openai.azure.com
+//
+// For Type A we must call the HUB base, not the project path.
+// The project path is only for the management API, NOT the inference API.
+
+function buildAzureUrl(endpoint, deployment) {
+  let base = endpoint.trim().replace(/\/+$/, '');
+
+  // Strip /api/projects/... to get the hub base URL
+  const projIdx = base.indexOf('/api/projects/');
+  if (projIdx !== -1) {
+    base = base.substring(0, projIdx);
+  }
+
+  // Both hub types use the same OpenAI-compatible inference path
+  return `${base}/openai/deployments/${deployment}/chat/completions?api-version=2024-12-01-preview`;
+}
+
+async function saveAndTest() {
+  const endpoint   = document.getElementById('cfg-endpoint').value.trim().replace(/\/+$/, '');
+  const deployment = document.getElementById('cfg-deployment').value.trim() || 'gpt-5-mini';
+  const apiKey     = document.getElementById('cfg-apikey').value.trim();
+  const statusEl   = document.getElementById('settings-status');
+
+  if (!endpoint || !apiKey) {
+    statusEl.className = 'settings-status error';
+    statusEl.innerHTML = '<i class="ri-error-warning-line"></i> Please fill in all fields.';
+    return;
+  }
+
+  statusEl.className = 'settings-status';
+  statusEl.innerHTML = '<i class="ri-loader-4-line"></i> Testing connection...';
+  statusEl.style.display = 'block';
+
+  const url = buildAzureUrl(endpoint, deployment);
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': apiKey
+      },
+      body: JSON.stringify({
+        messages: [{ role: 'user', content: 'Reply with exactly: API connected.' }],
+        max_completion_tokens: 500
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      const msg = err?.error?.message || res.statusText;
+      const code = res.status;
+
+      // Give helpful hints for common errors
+      let hint = '';
+      if (code === 404) hint = ' — Check your deployment name and endpoint URL.';
+      else if (code === 401 || code === 403) hint = ' — API key is wrong or expired.';
+      else if (code === 400) hint = ' — Endpoint or deployment name may be incorrect.';
+
+      throw new Error(`HTTP ${code}: ${msg}${hint}`);
+    }
+
+    const data = await res.json();
+    const reply = data?.choices?.[0]?.message?.content || 'Connected!';
+    saveConfig({ endpoint, deployment, apiKey });
+    updateApiBadge();
+
+    statusEl.className = 'settings-status success';
+    statusEl.innerHTML = `<i class="ri-checkbox-circle-fill"></i> Connected! Model replied: "<em>${reply.trim()}</em>"`;
+
+    setTimeout(closeSettings, 1800);
+    addSystemMsg(`Azure AI connected — model <strong>${deployment}</strong> is live.`);
+
+  } catch (err) {
+    statusEl.className = 'settings-status error';
+    statusEl.innerHTML = `<i class="ri-error-warning-line"></i> <strong>Failed:</strong> ${err.message}`;
+    console.error('Azure test error:', err);
+  }
+}
+
+// ── Chat Rendering ──
+const chatBody = document.getElementById('chat-body');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
+
+// conversation history for Azure (multi-turn)
+const conversationHistory = [];
+
+function getTime() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
+
+function appendMsg(html, role) {
+  const isUser = role === 'user';
+  const row = document.createElement('div');
+  row.className = `msg-row ${isUser ? 'user' : 'ai'}`;
+  row.innerHTML = `
+    <div class="msg-avatar ${isUser ? 'user-av' : 'ai-av'}">${isUser ? (user.name||'U').charAt(0) : '<i class="ri-robot-2-line"></i>'}</div>
+    <div class="msg-content">
+      <div class="msg-sender">${isUser ? 'You' : 'PlaceMe Copilot'}</div>
+      <div class="msg-bubble">${html}</div>
+      <div class="msg-time">${getTime()}</div>
+    </div>
+  `;
+  chatBody.appendChild(row);
+  chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+}
+
+function addSystemMsg(html) {
+  const div = document.createElement('div');
+  div.style.cssText = 'text-align:center;font-size:12px;color:var(--text-muted);padding:4px 16px;';
+  div.innerHTML = html;
+  chatBody.appendChild(div);
+  chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+}
+
+function showTyping() {
+  const row = document.createElement('div');
+  row.className = 'msg-row ai'; row.id = 'typing-indicator';
+  row.innerHTML = `
+    <div class="msg-avatar ai-av"><i class="ri-robot-2-line"></i></div>
+    <div class="msg-content">
+      <div class="msg-sender">PlaceMe Copilot</div>
+      <div class="msg-bubble"><div class="typing-dots"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div></div>
+    </div>
+  `;
+  chatBody.appendChild(row);
+  chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.remove();
+}
+
+// ── System Prompt for Azure API ──
+function buildSystemPrompt() {
+  return `You are PlaceMe AI Copilot, an expert campus placement assistant for an Indian engineering college.
+
+Student profile: Name: ${user.name}, Branch: ${user.branch}, CGPA: ${user.cgpa}.
+
+You help with:
+1. Eligibility checks (CGPA/branch vs company requirements)
+2. Upcoming placement drives (Oct-Nov 2026: Google 45LPA/Oct6, Microsoft 42LPA/Oct14, Goldman Sachs 32LPA/Oct21, Amazon 38LPA/Oct28, Flipkart 28LPA/Nov4, Deloitte 12LPA/Nov6, TCS 7LPA/Nov10)
+3. Interview preparation (DSA, system design, behavioral STAR method)
+4. Resume tips (Google XYZ formula, ATS formatting)
+5. Application status tracking
+
+Eligibility rules: Google: 8.0+ CGPA, CSE/IT/ECE; Microsoft: 7.5+, CSE/IT/ECE/EEE; Amazon: 7.0+, CSE/IT/ECE/EEE/ME; Goldman Sachs: 7.0+ all branches; Flipkart: 7.5+, CSE/IT/ECE; Deloitte: 6.5+ all branches; TCS/Infosys: 6.0+ all branches.
+
+Format your responses clearly using HTML. Use <strong> for emphasis, <ul><li> for lists. Keep responses concise and helpful. Be encouraging and professional.`;
+}
+
+// ── Mock fallback responses ──
+function getMockResponse(q) {
+  const query = q.toLowerCase();
+
+  if (query.includes('eligib') || query.includes('qualify') || query.includes('criteria')) {
+    const cgpa = user.cgpa || 0, branch = user.branch || '';
+    const checks = [
+      { name:'Google India', pkg:'₹45 LPA', minCgpa:8.0, branches:['CSE','IT','ECE'] },
+      { name:'Microsoft IDC', pkg:'₹42 LPA', minCgpa:7.5, branches:['CSE','IT','ECE','EEE'] },
+      { name:'Amazon India', pkg:'₹38 LPA', minCgpa:7.0, branches:['CSE','IT','ECE','EEE','ME'] },
+      { name:'Goldman Sachs', pkg:'₹32 LPA', minCgpa:7.0, branches:['CSE','IT','ECE','EEE','ME','CE'] },
+    ];
+    return `<p>Eligibility check for <strong>${user.name}</strong> (${branch}, ${cgpa} CGPA):</p>
+      ${checks.map(c => {
+        const ok = cgpa >= c.minCgpa && c.branches.includes(branch);
+        return `<div class="ai-card"><div class="ai-card-title">${c.name} — ${c.pkg} <span class="badge ${ok?'badge-success':'badge-danger'}"><i class="${ok?'ri-check-line':'ri-close-line'}"></i> ${ok?'Eligible':'Not Eligible'}</span></div>Min CGPA: ${c.minCgpa} | Branches: ${c.branches.join(', ')}</div>`;
+      }).join('')}
+      <p>Visit the <strong>Eligibility Matrix</strong> page to see all 10 companies.</p>`;
+  }
+
+  if (query.includes('drive') || query.includes('upcoming') || query.includes('schedule')) {
+    return `<p>Upcoming drives for Oct–Nov 2026:</p>
+      <div class="ai-card"><div class="ai-card-title">Google India — ₹45 LPA</div>Drive: Oct 6 | Deadline: Sep 28 | Roles: SDE-1</div>
+      <div class="ai-card"><div class="ai-card-title">Microsoft IDC — ₹42 LPA</div>Drive: Oct 14 | Deadline: Oct 4 | Roles: SDE L59</div>
+      <div class="ai-card"><div class="ai-card-title">Goldman Sachs — ₹32 LPA</div>Drive: Oct 21 | Deadline: Oct 12 | Roles: Engineering Analyst</div>
+      <div class="ai-card"><div class="ai-card-title">Amazon India — ₹38 LPA</div>Drive: Oct 28 | Deadline: Oct 18 | Roles: SDE-I</div>
+      <p>Go to <strong>Campus Drives</strong> to apply directly!</p>`;
+  }
+
+  if (query.includes('interview') || query.includes('prep') || query.includes('amazon') || query.includes('google') || query.includes('dsa')) {
+    const co = query.includes('amazon') ? 'Amazon' : query.includes('google') ? 'Google' : 'General';
+    return `<p><strong>${co} Interview Roadmap</strong></p>
+      <div class="ai-card"><div class="ai-card-title">Phase 1 — DSA (Online Assessment)</div><ul><li>Master: Arrays, Strings, Trees, Graphs, DP, Sliding Window</li><li>Practice 2–3 LeetCode problems daily (Medium level)</li><li>Target: O(N log N) solutions for N=10⁵</li></ul></div>
+      <div class="ai-card"><div class="ai-card-title">Phase 2 — System Design</div><ul><li>URL Shortener, LRU Cache, Twitter feed design</li><li>Cover: scalability, caching (Redis), load balancing, DBs</li></ul></div>
+      <div class="ai-card"><div class="ai-card-title">Phase 3 — Behavioral (STAR)</div><ul><li><strong>S</strong>ituation → <strong>T</strong>ask → <strong>A</strong>ction → <strong>R</strong>esult</li><li>${co === 'Amazon' ? 'Prepare 2 stories per Leadership Principle' : 'Focus on teamwork, growth mindset, ownership'}</li></ul></div>`;
+  }
+
+  if (query.includes('resume') || query.includes('cv') || query.includes('ats')) {
+    return `<p><strong>ATS Resume Guide for ${user.branch} Engineers</strong></p>
+      <div class="ai-card"><div class="ai-card-title">Google XYZ Formula</div><p>Format: <em>Accomplished [X] as measured by [Y], by doing [Z]</em></p><p style="color:var(--success);"><strong>Good:</strong> Reduced API latency by 38% via Redis caching, serving 50K daily users</p><p style="color:var(--danger);"><strong>Bad:</strong> Built backend with Node.js</p></div>
+      <div class="ai-card"><div class="ai-card-title">Rules</div><ul><li>1 page maximum (strict for undergrads)</li><li>No graphics, tables, or rating bars (ATS kills them)</li><li>Order: Education → Skills → Projects → Experience</li><li>File type: PDF with embedded fonts</li></ul></div>`;
+  }
+
+  if (query.includes('status') || query.includes('application') || query.includes('applied')) {
+    const apps = JSON.parse(sessionStorage.getItem('placeme_applications') || '[]');
+    if (apps.length === 0) return `<p>You have no active applications yet.</p><p>Head to <strong>Campus Drives</strong> and click <strong>Apply Now</strong> on eligible companies. Your applications will appear here and in the tracker!</p>`;
+    return `<p>Your active applications (${apps.length} total):</p>${apps.map(a => `<div class="ai-card"><div class="ai-card-title">${a.company} — ${a.role}<span class="badge badge-success"><i class="ri-checkbox-circle-line"></i> Active</span></div>Package: ₹${a.package}</div>`).join('')}`;
+  }
+
+  return `<p>Hi <strong>${user.name.split(' ')[0]}</strong>! I'm your PlaceMe Copilot. Ask me about:</p>
+    <ul>
+      <li><strong>Eligibility</strong> — "Am I eligible for Google?"</li>
+      <li><strong>Drives</strong> — "Show upcoming placements"</li>
+      <li><strong>Interview prep</strong> — "Amazon interview tips"</li>
+      <li><strong>Resume</strong> — "How to write ATS resume?"</li>
+      <li><strong>Applications</strong> — "Check my status"</li>
+    </ul>
+    <p style="color:var(--text-muted);font-size:13px;">Connect your Azure API key via the status badge above for real GPT-5 mini responses.</p>`;
+}
+
+// ── Core send function ──
+async function sendMsg(override) {
+  const text = override !== undefined ? override : chatInput.value.trim();
+  if (!text) return;
+
+  chatInput.value = '';
+  chatInput.style.height = 'auto';
+  appendMsg(text.replace(/</g, '&lt;'), 'user');
+
+  sendBtn.disabled = true;
+  chatInput.disabled = true;
+  showTyping();
+
+  const cfg = getConfig();
+
+  if (cfg && cfg.endpoint && cfg.apiKey) {
+    // ── Real Azure OpenAI call ──
+    conversationHistory.push({ role: 'user', content: text });
+
+    const url = buildAzureUrl(cfg.endpoint, cfg.deployment || 'gpt-5-mini');
+    const messages = [
+      { role: 'system', content: buildSystemPrompt() },
+      ...conversationHistory.slice(-10)  // keep last 10 turns for context
+    ];
+
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': cfg.apiKey
+        },
+        body: JSON.stringify({
+          messages,
+          max_completion_tokens: 5000
+        })
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(`${res.status} — ${errData?.error?.message || res.statusText}`);
+      }
+
+      const data = await res.json();
+
+      // Log full response so we can debug structure in browser console
+      console.log('Azure raw response:', JSON.stringify(data, null, 2));
+
+      // Handle different possible response shapes from Azure
+      let reply =
+        data?.choices?.[0]?.message?.content ||          // standard OpenAI format
+        data?.choices?.[0]?.text ||                       // older completion format
+        data?.output?.[0]?.content?.[0]?.text ||          // AI Foundry agent format
+        data?.content ||                                  // direct content field
+        '';
+
+      if (!reply) {
+        console.warn('Unexpected response structure:', data);
+        reply = '⚠️ The model returned an empty response. Check browser console (F12) for the raw response structure.';
+      }
+
+      conversationHistory.push({ role: 'assistant', content: reply });
+
+      removeTyping();
+      appendMsg(reply.replace(/\n/g, '<br>'), 'ai');
+
+    } catch (err) {
+      removeTyping();
+      appendMsg(`
+        <div class="api-error-notice">
+          <i class="ri-error-warning-line"></i>
+          <div>
+            <strong>Azure API Error:</strong> ${err.message}<br>
+            <span style="font-size:12px;margin-top:4px;display:block;">
+              Check your endpoint, deployment name, and API key.
+              <a href="#" onclick="openSettings();return false;" style="color:var(--primary);font-weight:600;">Re-configure →</a>
+            </span>
+          </div>
+        </div>
+        <p style="margin-top:10px;">Falling back to demo response:</p>
+        ${getMockResponse(text)}
+      `, 'ai');
+    }
+  } else {
+    // ── Demo mode ──
+    await new Promise(r => setTimeout(r, 800 + Math.random() * 500));
+    removeTyping();
+    appendMsg(getMockResponse(text), 'ai');
+  }
+
+  sendBtn.disabled = false;
+  chatInput.disabled = false;
+  chatInput.focus();
+}
+
+// ── Init ──
+function clearChat() {
+  chatBody.innerHTML = '';
+  conversationHistory.length = 0;
+  initWelcome();
+}
+
+function initWelcome() {
+  const cfg = getConfig();
+  const isLive = cfg && cfg.endpoint && cfg.apiKey;
+  appendMsg(`
+    <p><strong>Hi ${user.name.split(' ')[0]}, I'm your Placement Copilot!</strong></p>
+    <p>I'll help you navigate placements, check eligibility, prep for interviews, and optimize your resume.</p>
+    ${isLive
+      ? `<p style="color:var(--success);font-size:13px;"><i class="ri-checkbox-circle-fill"></i> Connected to Azure AI (${cfg.deployment}) — responses are powered by real GPT.</p>`
+      : `<p style="color:var(--text-muted);font-size:13px;"><i class="ri-information-line"></i> Running in demo mode. <a href="#" onclick="openSettings();return false;" style="color:var(--primary);font-weight:600;">Connect Azure API →</a></p>`
+    }
+  `, 'ai');
+
+  const prefill = sessionStorage.getItem('placeme_prefill');
+  if (prefill) {
+    sessionStorage.removeItem('placeme_prefill');
+    setTimeout(() => sendMsg(prefill), 600);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateApiBadge();
+  initWelcome();
+});
+</script>
+</body>
+</html>

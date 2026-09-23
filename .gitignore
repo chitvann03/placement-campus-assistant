@@ -1,0 +1,11 @@
+# Secrets — never commit these
+.env
+ui/config.js
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code
+.vscode/

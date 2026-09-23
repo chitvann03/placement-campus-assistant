@@ -1,0 +1,9 @@
+# Azure AI Foundry & Agent SDKs
+azure-ai-projects>=1.0.0b1
+azure-ai-agents>=1.0.0b1
+azure-identity>=1.15.0
+azure-search-documents>=11.6.0
+azure-ai-inference>=1.0.0b1
+
+# Environment & Utility
+python-dotenv>=1.0.1

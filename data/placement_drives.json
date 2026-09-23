@@ -1,0 +1,162 @@
+[
+  {
+    "company_name": "Google",
+    "date": "2026-10-06",
+    "roles": [
+      "Software Engineer (SDE-1)",
+      "Software Engineering Intern"
+    ],
+    "eligibility_cgpa": 8.0,
+    "branches": [
+      "CSE",
+      "IT",
+      "ECE"
+    ],
+    "package_lpa": 45.0,
+    "registration_deadline": "2026-09-28",
+    "venue": "Main Auditorium & Online Assessment Labs",
+    "type": "on-campus"
+  },
+  {
+    "company_name": "Microsoft",
+    "date": "2026-10-14",
+    "roles": [
+      "Software Engineer (L59)",
+      "Cloud Solution Architect"
+    ],
+    "eligibility_cgpa": 7.5,
+    "branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE"
+    ],
+    "package_lpa": 42.0,
+    "registration_deadline": "2026-10-04",
+    "venue": "Training & Placement Cell Seminar Hall 1",
+    "type": "on-campus"
+  },
+  {
+    "company_name": "Goldman Sachs",
+    "date": "2026-10-21",
+    "roles": [
+      "Engineering Analyst",
+      "Summer Analyst"
+    ],
+    "eligibility_cgpa": 7.5,
+    "branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "package_lpa": 32.0,
+    "registration_deadline": "2026-10-11",
+    "venue": "Virtual Assessment Platform & Lab A",
+    "type": "on-campus"
+  },
+  {
+    "company_name": "Amazon",
+    "date": "2026-10-28",
+    "roles": [
+      "Software Development Engineer I (SDE-1)",
+      "Quality Assurance Engineer (QAE)"
+    ],
+    "eligibility_cgpa": 7.0,
+    "branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME"
+    ],
+    "package_lpa": 38.0,
+    "registration_deadline": "2026-10-18",
+    "venue": "Amazon Virtual Hiring Suite & Interview Rooms 1-4",
+    "type": "on-campus"
+  },
+  {
+    "company_name": "Flipkart",
+    "date": "2026-11-04",
+    "roles": [
+      "Software Development Engineer I",
+      "Associate Product Manager"
+    ],
+    "eligibility_cgpa": 7.5,
+    "branches": [
+      "CSE",
+      "IT",
+      "ECE"
+    ],
+    "package_lpa": 30.0,
+    "registration_deadline": "2026-10-26",
+    "venue": "College Convention Center",
+    "type": "on-campus"
+  },
+  {
+    "company_name": "Deloitte",
+    "date": "2026-11-11",
+    "roles": [
+      "Analyst - Technology Consulting",
+      "Cyber Risk Analyst"
+    ],
+    "eligibility_cgpa": 6.5,
+    "branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "package_lpa": 9.0,
+    "registration_deadline": "2026-11-01",
+    "venue": "Management & Placement Block Hall B",
+    "type": "on-campus"
+  },
+  {
+    "company_name": "Tata Consultancy Services",
+    "date": "2026-11-18",
+    "roles": [
+      "TCS Prime Developer",
+      "TCS Digital Engineer",
+      "TCS Ninja"
+    ],
+    "eligibility_cgpa": 6.0,
+    "branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "package_lpa": 7.2,
+    "registration_deadline": "2026-11-08",
+    "venue": "Central Computing Facility (Labs 1-6)",
+    "type": "on-campus"
+  },
+  {
+    "company_name": "Accenture",
+    "date": "2026-11-25",
+    "roles": [
+      "Advanced Associate Software Engineer",
+      "Associate Software Engineer"
+    ],
+    "eligibility_cgpa": 6.5,
+    "branches": [
+      "CSE",
+      "IT",
+      "ECE",
+      "EEE",
+      "ME",
+      "CE"
+    ],
+    "package_lpa": 8.5,
+    "registration_deadline": "2026-11-15",
+    "venue": "National Assessment Center / Online Platform",
+    "type": "off-campus"
+  }
+]

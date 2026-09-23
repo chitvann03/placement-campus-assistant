@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url=login.html" />
+  <title>PlaceMe — Redirecting...</title>
+</head>
+<body>
+  <script>
+    // Redirect to login if not authenticated, dashboard if already logged in
+    const user = sessionStorage.getItem('placeme_user');
+    window.location.href = user ? 'dashboard.html' : 'login.html';
+  </script>
+</body>
+</html>

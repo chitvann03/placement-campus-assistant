@@ -1,0 +1,839 @@
+{
+  "company_types": {
+    "product": {
+      "rounds": [
+        {
+          "name": "Online Coding Assessment (OA)",
+          "format": "90 minutes, 2-3 algorithmic problems on HackerRank / Codility / CodeSignal",
+          "tips": [
+            "Start by solving the easiest problem to build confidence and secure partial points.",
+            "Always analyze constraints carefully — 10^5 elements typically require an O(N) or O(N log N) solution.",
+            "Pay close attention to corner cases such as empty inputs, single element arrays, and integer overflow (use 64-bit integers)."
+          ],
+          "common_topics": [
+            "Arrays & Hashing",
+            "Binary Search",
+            "Sliding Window & Two Pointers",
+            "Tree Traversals",
+            "Dynamic Programming (0/1 Knapsack, LCS)"
+          ]
+        },
+        {
+          "name": "Technical Interview 1: Data Structures & Algorithms",
+          "format": "45-60 minutes 1:1 live coding via Google Meet/Zoom and shared online editor",
+          "tips": [
+            "Think out loud — interviewers care more about your thought process and trade-off analysis than immediate perfection.",
+            "Clarify input assumptions before typing code (e.g., negative numbers, duplicates, memory limits).",
+            "State time and space complexity explicitly using Big-O notation before and after coding."
+          ],
+          "common_topics": [
+            "Binary Trees & BSTs",
+            "Graphs (BFS/DFS, Dijkstra, Cycle Detection)",
+            "Heaps & Priority Queues",
+            "Recursion & Backtracking"
+          ]
+        },
+        {
+          "name": "Technical Interview 2: Problem Solving & Core CS",
+          "format": "45-60 minutes live technical discussion and design problem",
+          "tips": [
+            "Review Operating Systems concepts (paging, multi-threading, virtual memory) and DBMS (indexing, ACID properties).",
+            "Be ready to write clean, modular, object-oriented code following SOLID principles.",
+            "Discuss testing strategies for your code and identify possible failure modes."
+          ],
+          "common_topics": [
+            "Low-Level Design (OOD)",
+            "OS Concurrency & Deadlocks",
+            "DBMS Normalization & SQL Queries",
+            "Trie & String Algorithms"
+          ]
+        },
+        {
+          "name": "Managerial & Culture Fit Round",
+          "format": "30-45 minutes behavioral discussion with Senior Engineering Manager",
+          "tips": [
+            "Use the STAR method (Situation, Task, Action, Result) for behavioral scenarios.",
+            "Demonstrate intellectual curiosity, team collaboration, and ability to handle technical conflict constructively.",
+            "Prepare 2-3 thoughtful questions about the team's engineering challenges and roadmap."
+          ],
+          "common_topics": [
+            "Conflict Resolution",
+            "Overcoming Technical Failures",
+            "Cross-functional Collaboration",
+            "Career Aspirations"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Consistent daily practice on LeetCode (medium difficulty) is more effective than marathon cramming.",
+        "Master one core programming language (C++, Java, or Python) and know its standard library inside out (STL/Collections).",
+        "Maintain an active GitHub profile with at least one non-trivial full-stack or systems project."
+      ],
+      "resources_links": [
+        {
+          "title": "NeetCode 150 Roadmap",
+          "url": "https://neetcode.io/roadmap"
+        },
+        {
+          "title": "Striver's SDE Sheet (Take U Forward)",
+          "url": "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2"
+        },
+        {
+          "title": "CS Fundamentals (Gate Smashers)",
+          "url": "https://www.youtube.com/@GateSmashers"
+        }
+      ]
+    },
+    "service": {
+      "rounds": [
+        {
+          "name": "Cognitive & Technical Aptitude Test",
+          "format": "60-90 minutes MCQ assessment covering quantitative, logical, verbal, and pseudo-code",
+          "tips": [
+            "Focus on speed and accuracy; practice mental math and shortcut formulas for speed-distance-time and permutations.",
+            "Carefully trace pseudo-code questions by tracking variable states on scratch paper.",
+            "Familiarize yourself with company-specific test patterns (e.g., TCS NQT, Infosys InfyTQ)."
+          ],
+          "common_topics": [
+            "Quantitative Aptitude (Percentages, Profit & Loss, Work & Time)",
+            "Logical Deductions & Syllogisms",
+            "Reading Comprehension",
+            "Pseudo-code & Dry Running"
+          ]
+        },
+        {
+          "name": "Hands-on Coding Round",
+          "format": "30-60 minutes with 1-2 fundamental programming problems",
+          "tips": [
+            "Focus on clean syntactical correctness and standard I/O handling.",
+            "Don't overcomplicate; straightforward brute-force or O(N) loops are often sufficient to pass all test cases.",
+            "Double-check basic array indexing and boundary conditions."
+          ],
+          "common_topics": [
+            "String Manipulations (Palindrome, Anagrams, Substrings)",
+            "Array Operations (Duplicates, Sorting, Reversal)",
+            "Matrix Operations",
+            "Basic Number Theory (Primes, GCD, Fibonacci)"
+          ]
+        },
+        {
+          "name": "Technical Interview",
+          "format": "25-35 minutes 1:1 discussion on resume projects and engineering basics",
+          "tips": [
+            "Know every single word on your resume, especially your final-year or semester academic projects.",
+            "Clearly explain the 4 pillars of Object-Oriented Programming with real-world analogies.",
+            "Be prepared to write basic SQL queries (INNER JOIN, GROUP BY, HAVING, subqueries)."
+          ],
+          "common_topics": [
+            "OOP Concepts (Encapsulation, Polymorphism, Inheritance, Abstraction)",
+            "C/C++/Java Basics (Pointers, Memory, Garbage Collection)",
+            "SQL & Basic Database Queries",
+            "Final Year / Semester Project Architecture"
+          ]
+        },
+        {
+          "name": "HR & Personal Interview",
+          "format": "15-20 minutes behavioral and background verification round",
+          "tips": [
+            "Maintain professional demeanor and clear verbal communication in English.",
+            "Express clear willingness to relocate anywhere in India and adapt to project-based technology shifts.",
+            "Answer confidently regarding academic gaps or active backlogs with positive reframing."
+          ],
+          "common_topics": [
+            "Tell Me About Yourself",
+            "Relocation Flexibility & Shift Work",
+            "Why This Company?",
+            "Handling Work Pressure"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Aptitude test elimination rate is typically over 60%; dedicate adequate time to quantitative and logical practice.",
+        "Ensure your spoken English is fluent and confident, as service companies heavily evaluate client-readiness.",
+        "Be open and flexible about tech stack allocation, from cloud infrastructure to application maintenance."
+      ],
+      "resources_links": [
+        {
+          "title": "IndiaBIX Aptitude & Reasoning",
+          "url": "https://www.indiabix.com/"
+        },
+        {
+          "title": "GeeksforGeeks Core CS & Campus Preparation",
+          "url": "https://www.geeksforgeeks.org/campus-placement-preparation-course/"
+        },
+        {
+          "title": "PrepInsta Placement Papers",
+          "url": "https://prepinsta.com/"
+        }
+      ]
+    },
+    "consulting": {
+      "rounds": [
+        {
+          "name": "Online Cognitive, Verbal & Case Aptitude",
+          "format": "60 minutes adaptive online test testing critical reasoning and numerical deduction",
+          "tips": [
+            "Practice data interpretation from charts, tables, and multi-variable business graphs.",
+            "Focus on logical consistency and reading between the lines in business verbal passages."
+          ],
+          "common_topics": [
+            "Data Interpretation (Bar/Pie/Scatter charts)",
+            "Critical & Analytical Reasoning",
+            "Business Math & Financial Calculations",
+            "Verbal Logic"
+          ]
+        },
+        {
+          "name": "Case Study & Group Discussion (GD/Case Prep)",
+          "format": "45 minutes group evaluation or business problem-solving case",
+          "tips": [
+            "Structure your thought process using frameworks (e.g., SWOT, MECE - Mutually Exclusive, Collectively Exhaustive).",
+            "Never interrupt others rudely in a GD; build upon another candidate's point while introducing new data-driven insights.",
+            "Drive the team towards a quantifiable, actionable solution before time runs out."
+          ],
+          "common_topics": [
+            "Market Sizing & Guesstimates",
+            "Digital Transformation Scenarios",
+            "Current Tech Industry Trends (AI Adoption, Cloud Economics)",
+            "Operational Efficiency Optimization"
+          ]
+        },
+        {
+          "name": "Partner / Director Interview",
+          "format": "30-45 minutes leadership, case discussion, and fitment interview",
+          "tips": [
+            "Demonstrate a high business acumen alongside foundational tech knowledge.",
+            "Show how your engineering skills solve real-world enterprise business problems.",
+            "Communicate crisply with an executive-level executive presence."
+          ],
+          "common_topics": [
+            "Problem-solving Methodology",
+            "Client Relationship Management",
+            "Ethical Dilemmas in Business",
+            "Long-term Consulting Trajectory"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Read business publications like The Economic Times, Mint, or Harvard Business Review to stay abreast of enterprise technology trends.",
+        "Practice guesstimate problems regularly (e.g., 'Estimate daily domestic flights across India').",
+        "Dress impeccably in business formal attire for all video and in-person rounds."
+      ],
+      "resources_links": [
+        {
+          "title": "Case in Point (Marc Cosentino)",
+          "url": "https://www.cqinteractive.online/"
+        },
+        {
+          "title": "Victor Cheng - Case Interview Secrets",
+          "url": "https://www.caseinterview.com/"
+        },
+        {
+          "title": "Deloitte Campus Case Study Preparation",
+          "url": "https://www2.deloitte.com/us/en/pages/careers/articles/case-interview-preparation.html"
+        }
+      ]
+    },
+    "startup": {
+      "rounds": [
+        {
+          "name": "Machine Coding / Take-home Assignment",
+          "format": "24-48 hour project or 2-hour live machine coding (building a mini-app or service)",
+          "tips": [
+            "Prioritize a working end-to-end prototype with clean folder structure over half-baked complex features.",
+            "Write comprehensive unit tests and document setup steps in a clear README.md.",
+            "Follow standard naming conventions, linting rules, and modular separation of concerns."
+          ],
+          "common_topics": [
+            "RESTful API Development",
+            "State Management in React / Mobile",
+            "CRUD Operations with SQLite / PostgreSQL",
+            "Rate Limiter or Cache Implementation"
+          ]
+        },
+        {
+          "name": "Deep Tech Architecture & Code Review",
+          "format": "45-60 minutes peer code walkthrough with a founding or lead engineer",
+          "tips": [
+            "Be prepared to defend your architectural decisions and trade-offs (e.g., why SQL over NoSQL).",
+            "Highlight performance optimizations, caching, and error resilience.",
+            "Be receptive to feedback and demonstrate humility when flaws are pointed out."
+          ],
+          "common_topics": [
+            "Async Programming & Event Loops",
+            "Database Schema Design",
+            "API Authentication (JWT, OAuth)",
+            "WebSockets & Real-time Communication"
+          ]
+        },
+        {
+          "name": "Founder / Culture Fit Interview",
+          "format": "30-45 minutes direct conversation with Founder or VP Engineering",
+          "tips": [
+            "Demonstrate high ownership, resourcefulness, and a 'bias for action'.",
+            "Show enthusiasm for the company's specific product niche, mission, and user metrics.",
+            "Demonstrate that you thrive in fast-changing, ambiguous environments with minimal hand-holding."
+          ],
+          "common_topics": [
+            "Side Projects & Hackathon Experience",
+            "Product Vision & User Empathy",
+            "Ability to Pivot Under Uncertainty",
+            "Self-directed Learning"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Deploy your side projects live on platforms like Vercel, Render, or AWS so interviewers can test them instantly.",
+        "Demonstrate full-stack agility — being comfortable touching front-end, back-end, and CI/CD pipelines makes you stand out.",
+        "Actively contribute to open-source software or write technical blogs explaining how you solved complex bugs."
+      ],
+      "resources_links": [
+        {
+          "title": "Full Stack Open (University of Helsinki)",
+          "url": "https://fullstackopen.com/en/"
+        },
+        {
+          "title": "Roadmap.sh Developer Roadmaps",
+          "url": "https://roadmap.sh/"
+        },
+        {
+          "title": "The Pragmatic Programmer",
+          "url": "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/"
+        }
+      ]
+    },
+    "finance": {
+      "rounds": [
+        {
+          "name": "Quantitative Aptitude & HackerRank Coding",
+          "format": "90-120 minutes: Advance Probability, Permutations, Linear Algebra, and 2 DSA problems",
+          "tips": [
+            "Practice college-level probability (Bayes theorem, expectation, variance, conditional probability).",
+            "Write highly optimized algorithms — test cases often feature strict runtime limits.",
+            "Watch out for precision issues with floating-point arithmetic; know how to manage round-off errors."
+          ],
+          "common_topics": [
+            "Probability & Combinatorics",
+            "Dynamic Programming (state optimization)",
+            "Bit Manipulation & Math Algorithms",
+            "Graph Shortest Path & Flow"
+          ]
+        },
+        {
+          "name": "Technical Round 1: Core Algorithms & Concurrency",
+          "format": "60 minutes deep dive into DSA and low-latency system concepts",
+          "tips": [
+            "Understand thread synchronization primitives (mutexes, semaphores, atomic variables).",
+            "Know the memory layout of programs (heap, stack, cache locality, cache lines).",
+            "Be ready to analyze space-time trade-offs at microsecond scales."
+          ],
+          "common_topics": [
+            "Multi-threading & Race Conditions",
+            "Memory Management & Cache Performance",
+            "Advanced Trees (AVL, Red-Black, Segment Trees)",
+            "Hashing & Collision Resolution"
+          ]
+        },
+        {
+          "name": "Technical Round 2: System Architecture & Database Internals",
+          "format": "45-60 minutes focusing on transactional systems and data consistency",
+          "tips": [
+            "Explain ACID properties with practical banking transaction examples.",
+            "Understand database isolation levels and locking mechanisms (optimistic vs pessimistic).",
+            "Show clarity on distributed consensus and message queues."
+          ],
+          "common_topics": [
+            "Database Indexing (B+ Trees, LSM Trees)",
+            "Distributed Transactions (2PC, Sagas)",
+            "Message Brokers (Kafka, RabbitMQ)",
+            "Network Protocols (TCP vs UDP, Socket programming)"
+          ]
+        },
+        {
+          "name": "Values & Hiring Manager Round",
+          "format": "30-45 minutes evaluating ethical integrity, regulatory respect, and grit",
+          "tips": [
+            "Emphasize uncompromising ethics and accuracy — financial systems have zero tolerance for sloppy edge-case handling.",
+            "Demonstrate genuine curiosity regarding modern fintech innovations and algorithmic trading.",
+            "Highlight calm decision-making under intense pressure."
+          ],
+          "common_topics": [
+            "Ethical Accountability in Software",
+            "Navigating High-Pressure Environments",
+            "Attention to Detail & Risk Management",
+            "Personal Core Values"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Strengthen your C++ or Java core capabilities, especially multi-threading and low-level memory handling.",
+        "Practice quantitative brainteasers and probability puzzles alongside standard LeetCode problems.",
+        "Demonstrate an appreciation for clean, highly testable, and fault-tolerant software engineering."
+      ],
+      "resources_links": [
+        {
+          "title": "Heard on The Street: Quantitative Questions",
+          "url": "https://www.quantstart.com/articles/Heard-on-The-Street-Quantitative-Questions-from-Wall-Street-Job-Interviews/"
+        },
+        {
+          "title": "Fifty Challenging Problems in Probability (Mosteller)",
+          "url": "https://www.goodreads.com/book/show/159495.Fifty_Challenging_Problems_in_Probability_with_Solutions"
+        },
+        {
+          "title": "Designing Data-Intensive Applications (Martin Kleppmann)",
+          "url": "https://dataintensive.net/"
+        }
+      ]
+    }
+  },
+  "companies": {
+    "Google": {
+      "rounds": [
+        {
+          "name": "Online Assessment (OA)",
+          "format": "90 minutes, 2 algorithmic problems on Google internal platform",
+          "tips": [
+            "Both problems must be solved with optimal time/space complexity to clear the cutoff.",
+            "Thoroughly analyze and handle tricky edge cases (e.g., negative values, disconnected components).",
+            "Write modular code with clear variable and function naming."
+          ],
+          "common_topics": [
+            "Dynamic Programming on Trees & Grids",
+            "Graph Traversals & Topological Sort",
+            "Binary Search on Answer Space",
+            "Segment Trees / Fenwick Trees"
+          ]
+        },
+        {
+          "name": "Technical Rounds (DSA 1 & 2)",
+          "format": "45 minutes each on Google Docs or dedicated online editor without autocomplete or compilation",
+          "tips": [
+            "Do NOT start coding immediately. Clarify problem bounds, constraints, and inputs for the first 5-8 minutes.",
+            "Communicate trade-offs before choosing an algorithm (e.g. brute force vs greedy vs DP).",
+            "Dry-run your solution by manually tracing an example input line by line on the screen."
+          ],
+          "common_topics": [
+            "Recursion & Backtracking",
+            "Tree Traversal & Lowest Common Ancestor",
+            "Dijkstra & Shortest Paths",
+            "Trie and Advanced String Searching"
+          ]
+        },
+        {
+          "name": "Googliness & Leadership Round",
+          "format": "45 minutes behavioral interview assessing ethics, navigating ambiguity, and inclusivity",
+          "tips": [
+            "Google values doing the right thing for the user, intellectual humility, and psychological safety.",
+            "Illustrate stories where you helped a struggling peer or resolved conflicting viewpoints peacefully.",
+            "Frame answers using the STAR method with tangible, reflective outcomes."
+          ],
+          "common_topics": [
+            "Handling Ambiguity in Requirements",
+            "Disagreed and Committed with Teammates",
+            "Championing Diversity and Inclusion",
+            "Response to Critical Feedback"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Practice coding on a blank Google Doc without syntax highlighting or compiler assistance.",
+        "Always talk out loud while writing code; silence is penalized because interviewers cannot assess your thought stream.",
+        "Be open to hints from the interviewer — they want to see how collaboratively you tackle unexpected challenges."
+      ],
+      "resources_links": [
+        {
+          "title": "Google Tech Dev Guide",
+          "url": "https://techdevguide.withgoogle.com/"
+        },
+        {
+          "title": "Google Interview Preparation (LeetCode Curated)",
+          "url": "https://leetcode.com/company/google/"
+        }
+      ]
+    },
+    "Microsoft": {
+      "rounds": [
+        {
+          "name": "Codility Online Coding Round",
+          "format": "75 minutes, 3 coding questions on Codility",
+          "tips": [
+            "Focus on clean, readable code; Codility runs automated test suites for both correctness and performance.",
+            "Ensure that memory overhead is strictly controlled.",
+            "Check for array index out-of-bounds thoroughly."
+          ],
+          "common_topics": [
+            "Strings & Array Manipulation",
+            "Linked Lists (Reversal, Cycle Detection)",
+            "Binary Search & Two Pointers",
+            "Basic Tree Recursion"
+          ]
+        },
+        {
+          "name": "Technical Round 1 & 2: DSA & OOD",
+          "format": "45-60 minutes live problem solving and object-oriented design",
+          "tips": [
+            "Apply standard design patterns where appropriate (Factory, Singleton, Observer).",
+            "Write modular code with well-encapsulated classes and interfaces.",
+            "Demonstrate a solid grasp of Core CS concepts (Threads, Virtual Memory, Inverted Index)."
+          ],
+          "common_topics": [
+            "Object-Oriented Design (Parking Lot, Elevator, Chess Game)",
+            "Binary Trees & Balanced BSTs",
+            "OS Process Synchronization & Deadlocks",
+            "SQL Joins and Indexing Mechanisms"
+          ]
+        },
+        {
+          "name": "As-Appropriate (AA) / Hiring Manager Round",
+          "format": "45 minutes high-level technical deep dive, project inquiry, and growth mindset fit",
+          "tips": [
+            "Demonstrate Microsoft's core value: Growth Mindset ('learn-it-all' beats 'know-it-all').",
+            "Be prepared to draw architecture diagrams for your college or side projects.",
+            "Know Azure fundamentals and general cloud paradigms at a high conceptual level."
+          ],
+          "common_topics": [
+            "Growth Mindset Scenarios",
+            "Academic Project Architecture Deep Dive",
+            "Handling Constructive Criticism",
+            "Vision for Enterprise Cloud & AI"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Microsoft strongly prioritizes code readability, modularity, and maintainability over clever one-liners.",
+        "Revise Operating Systems (Silberschatz) and DBMS fundamentals thoroughly before the drive.",
+        "Emphasize your willingness to learn new technologies and stacks."
+      ],
+      "resources_links": [
+        {
+          "title": "Microsoft Careers Prep Guide",
+          "url": "https://careers.microsoft.com/v2/global/en/hiring-tips"
+        },
+        {
+          "title": "Microsoft Interview Questions (LeetCode)",
+          "url": "https://leetcode.com/company/microsoft/"
+        }
+      ]
+    },
+    "Amazon": {
+      "rounds": [
+        {
+          "name": "Online Assessment (OA 1 & 2)",
+          "format": "Debugging test, 2 DSA questions (70 mins), and Work Style Assessment (Amazon LP)",
+          "tips": [
+            "During the Work Style assessment, strictly choose options that reflect Amazon's Leadership Principles.",
+            "In the coding section, aim for 100% test cases passed for both questions.",
+            "Don't pick middle-ground answers on the behavioral survey; choose strongly agree or strongly disagree."
+          ],
+          "common_topics": [
+            "Heaps & Priority Queues",
+            "Breadth First Search (Matrix / Grid)",
+            "Dynamic Programming (Subsets, Paths)",
+            "Two Pointers & Hash Maps"
+          ]
+        },
+        {
+          "name": "Technical Rounds (DSA & Clean Code)",
+          "format": "60 minutes each: 1 DSA problem + 2 Amazon Leadership Principle (LP) behavioral scenarios",
+          "tips": [
+            "Every single round dedicates at least 20 minutes to Amazon Leadership Principles — prepare 2 distinct stories per LP.",
+            "Write production-quality code with descriptive variable names and helper functions.",
+            "Inquire about scale, traffic, and distributed caching if the question hints at systems."
+          ],
+          "common_topics": [
+            "Trie & Prefix Trees",
+            "Graph Topological Sort & BFS",
+            "Top K Frequent Elements",
+            "Low-Level System Design"
+          ]
+        },
+        {
+          "name": "Bar Raiser Round",
+          "format": "60 minutes with an independent senior interviewer from an outside team",
+          "tips": [
+            "The Bar Raiser evaluates whether you raise the average performance bar of the team.",
+            "Deeply reflect 'Customer Obsession', 'Ownership', and 'Dive Deep' in your answers.",
+            "Never blame external teammates or past circumstances when describing failed attempts."
+          ],
+          "common_topics": [
+            "Customer Obsession Case Studies",
+            "Frugality & Delivering Results",
+            "Bias for Action vs Calculated Risk",
+            "Complex Edge-case Debugging"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Memorize all 16 Amazon Leadership Principles and prepare at least 8 versatile STAR-format stories.",
+        "Time management is crucial: ensure you have enough time to write full executable code after discussing approaches.",
+        "Always optimize for customer experience and operational simplicity."
+      ],
+      "resources_links": [
+        {
+          "title": "Amazon Leadership Principles Explained",
+          "url": "https://www.aboutamazon.com/about-us/leadership-principles"
+        },
+        {
+          "title": "Amazon Online Assessment Questions (LeetCode Discuss)",
+          "url": "https://leetcode.com/company/amazon/"
+        }
+      ]
+    },
+    "Goldman Sachs": {
+      "rounds": [
+        {
+          "name": "Aptitude & Coding Assessment",
+          "format": "120 minutes on HackerRank: Math, Probability, CS Fundamentals MCQs, and 2 Coding problems",
+          "tips": [
+            "Brush up on college discrete math, combinatorics, probability, and matrix algebra.",
+            "Solve the math MCQs carefully as negative marking or strict sectional cutoffs often apply.",
+            "Ensure efficient algorithmic complexity — quadratic solutions will timeout on hidden test cases."
+          ],
+          "common_topics": [
+            "Probability & Expectation",
+            "String Processing & Hashing",
+            "Dynamic Programming (Knapsack & Coin Change)",
+            "Binary Trees & BSTs"
+          ]
+        },
+        {
+          "name": "Technical Interview 1 & 2",
+          "format": "45-60 minutes live technical problem solving and systems fundamentals",
+          "tips": [
+            "Goldman places extreme value on algorithmic optimization and mathematical rigor.",
+            "Be prepared to answer in-depth questions on Java/C++ memory management and garbage collection.",
+            "Demonstrate awareness of data structures suited for high-throughput, low-latency applications."
+          ],
+          "common_topics": [
+            "Multithreading, Locks & Synchronization",
+            "Custom Data Structures (e.g., LRU Cache, Median in a Stream)",
+            "Recursion with Memoization",
+            "Database Normalization and Index Internals"
+          ]
+        },
+        {
+          "name": "Values & Behavioral Round",
+          "format": "30-45 minutes with a Vice President evaluating integrity and team culture",
+          "tips": [
+            "Show high ethical standards and accuracy; finance leaves no room for carelessness.",
+            "Demonstrate keen curiosity in financial markets and quantitative technology.",
+            "Speak about experiences where you collaborated effectively within diverse teams."
+          ],
+          "common_topics": [
+            "Teamwork and Collective Ownership",
+            "Handling Stressful Deadlines",
+            "Ethical Judgment",
+            "Why Goldman Sachs & Why Finance Tech?"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Focus on writing bug-free code on the first attempt with meticulous edge-case handling.",
+        "Practice math and logic puzzles on GeeksforGeeks and Brainstellar.",
+        "Review Object-Oriented concepts, collections framework, and JVM internals if using Java."
+      ],
+      "resources_links": [
+        {
+          "title": "Brainstellar Puzzles",
+          "url": "https://brainstellar.com/"
+        },
+        {
+          "title": "Goldman Sachs Interview Experience (GeeksforGeeks)",
+          "url": "https://www.geeksforgeeks.org/goldman-sachs-interview-experience/"
+        }
+      ]
+    },
+    "TCS": {
+      "rounds": [
+        {
+          "name": "TCS NQT (National Qualifier Test)",
+          "format": "Integrated test comprising Foundation Section (Numerical, Reasoning, Verbal) + Advanced Section (Advanced Quant & Coding)",
+          "tips": [
+            "Scoring high in the Advanced section directly qualifies you for the higher-tier Digital or Prime interviews.",
+            "Do not spend too long on any single quantitative question; utilize smart elimination.",
+            "Ensure that basic coding syntax in your chosen language has zero compilation errors."
+          ],
+          "common_topics": [
+            "Percentages, Averages, Profit & Loss",
+            "Data Sufficiency & Statement Assumptions",
+            "Sentence Correction & Vocabulary",
+            "String Processing & Array Counting"
+          ]
+        },
+        {
+          "name": "Technical Interview",
+          "format": "20-30 minutes covering academic syllabus and basic programming",
+          "tips": [
+            "Review your engineering branch basics (even for non-CSE students, explain basic C and SQL).",
+            "Be prepared to write code for basic programs like Fibonacci series, prime check, and Armstrong numbers.",
+            "Explain your final year/major academic project clearly and your specific individual contributions."
+          ],
+          "common_topics": [
+            "C Programming Basics (Pointers, Storage Classes)",
+            "OOP Concepts (Classes, Objects, Inheritance)",
+            "SQL Basic Queries (SELECT, JOIN, GROUP BY)",
+            "Academic Final Year / Mini Project"
+          ]
+        },
+        {
+          "name": "Managerial & HR Round",
+          "format": "15-20 minutes behavioral and suitability assessment",
+          "tips": [
+            "Explicitly confirm your willingness to relocate to any TCS office in India.",
+            "Affirm your comfort working in rotational shifts and learning any modern technology stack.",
+            "Showcase positive attitude, loyalty, and commitment to long-term career growth."
+          ],
+          "common_topics": [
+            "Self-introduction",
+            "Willingness to Relocate / Shift Readiness",
+            "Handling Challenging Teammates",
+            "Agreement with 1-Year Service Bond"
+          ]
+        }
+      ],
+      "general_tips": [
+        "A strong performance in the Advanced section of NQT opens up the Digital (7.2 LPA) and Prime (9 LPA) offers.",
+        "Practice past TCS NQT question sets on PrepInsta and Youth4work.",
+        "Ensure clear, polite, and respectful communication throughout the interview."
+      ],
+      "resources_links": [
+        {
+          "title": "TCS NQT Preparation Portal",
+          "url": "https://learning.tcsionhub.in/hub/national-qualifier-test/"
+        },
+        {
+          "title": "PrepInsta TCS NQT Dashboard",
+          "url": "https://prepinsta.com/tcs-nqt/"
+        }
+      ]
+    },
+    "Infosys": {
+      "rounds": [
+        {
+          "name": "Infosys Online Assessment",
+          "format": "Sectional test: Mathematical Ability, Logical & Analytical Reasoning, Verbal, and Hands-on Coding",
+          "tips": [
+            "Each section has its own individual cutoff score; manage time equally across sections.",
+            "Critical reasoning and data interpretation questions carry high weight.",
+            "For coding, pass all default test cases before submitting."
+          ],
+          "common_topics": [
+            "Time, Speed & Distance, Cryptarithmetic",
+            "Data Interpretation & Venn Diagrams",
+            "Sentence Correction and Error Spotting",
+            "Array Manipulation and Matrix Rotations"
+          ]
+        },
+        {
+          "name": "Technical Interview",
+          "format": "25-35 minutes covering resume, CS fundamentals, and basic programming",
+          "tips": [
+            "Clearly explain database transactions, normalization (1NF to 3NF), and primary/foreign keys.",
+            "Walk through your mini projects with clean diagrams if requested.",
+            "Demonstrate clear understanding of your preferred programming language."
+          ],
+          "common_topics": [
+            "OOP Principles with Real-life Examples",
+            "DBMS Normalization & Indexing",
+            "Web Development Basics (HTML, CSS, JS, REST APIs)",
+            "Resume Projects Architecture"
+          ]
+        },
+        {
+          "name": "HR Interview",
+          "format": "15-20 minutes verifying candidate credentials, adaptability, and soft skills",
+          "tips": [
+            "Confirm that you are comfortable with pan-India relocation after Mysore campus training.",
+            "State your excitement about training at the Infosys Mysore Global Education Center.",
+            "Emphasize punctuality, ethics, and team cooperation."
+          ],
+          "common_topics": [
+            "Personal Background & Hobbies",
+            "Readiness for Mysore Training & Pan-India Relocation",
+            "Handling Stress & Deadlines",
+            "Long-term Career Objectives"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Participating in HackWithInfy or InfyTQ certifications provides direct shortcuts to DSE (6.5 LPA) and SP (9.5 LPA) interviews.",
+        "Cryptarithmetic and advanced puzzles frequently appear in Infosys aptitude tests — practice these thoroughly.",
+        "Be eager and enthusiastic about technology upskilling."
+      ],
+      "resources_links": [
+        {
+          "title": "Infosys Springboard Learning Platform",
+          "url": "https://infyspringboard.onwingspan.com/"
+        },
+        {
+          "title": "GeeksforGeeks Infosys Recruitment Process",
+          "url": "https://www.geeksforgeeks.org/infosys-recruitment-process/"
+        }
+      ]
+    },
+    "Deloitte": {
+      "rounds": [
+        {
+          "name": "Online Assessment (Deloitte National Test)",
+          "format": "75 minutes: Quantitative Aptitude, Logical Reasoning, Verbal Ability, and Technical MCQs",
+          "tips": [
+            "Deloitte emphasizes verbal ability and analytical business logic.",
+            "Review basic cloud, networking, and IT security concepts for the technical MCQ section.",
+            "Maintain steady pacing without getting bogged down on complicated arithmetic."
+          ],
+          "common_topics": [
+            "Data Interpretation & Business Math",
+            "Syllogisms and Critical Thinking",
+            "Verbal Comprehension and Grammatical Precision",
+            "Fundamental IT Infrastructure & Cloud Concepts"
+          ]
+        },
+        {
+          "name": "Case Study & Group Discussion Round",
+          "format": "30-40 minutes evaluating team interaction, structured reasoning, and problem formulation",
+          "tips": [
+            "Frame your recommendations logically (Problem Statement -> Analysis -> Recommendation -> Risks).",
+            "Encourage less vocal participants politely to show leadership and inclusive teamwork.",
+            "Keep interventions concise, factual, and solution-focused."
+          ],
+          "common_topics": [
+            "Enterprise Digital Transformation Case",
+            "Evaluating Tech Vendor Migration",
+            "Cybersecurity Incident Response Strategy",
+            "Sustainable Business IT Practices"
+          ]
+        },
+        {
+          "name": "Partner & HR Round",
+          "format": "30 minutes evaluating consulting fitment, communication polish, and ambition",
+          "tips": [
+            "Present yourself with executive presence, clear diction, and active listening.",
+            "Explain how your engineering background complements Deloitte's business advisory services.",
+            "Highlight adaptability to varying client cultures and tight deliverables."
+          ],
+          "common_topics": [
+            "Why Deloitte & Why Consulting?",
+            "Handling Ambiguous Client Requirements",
+            "Leading a Team Under Deadline Pressure",
+            "Ethical Decisions in Professional Services"
+          ]
+        }
+      ],
+      "general_tips": [
+        "Articulate your ideas clearly and concisely — consulting recruiters look for confident client-facing potential.",
+        "Understand Deloitte's key service areas: Tech Consulting, Cyber Risk, Enterprise Strategy, and Human Capital.",
+        "Maintain high situational awareness and active listening in group rounds."
+      ],
+      "resources_links": [
+        {
+          "title": "Deloitte Campus Careers Guide",
+          "url": "https://www2.deloitte.com/in/en/pages/careers/articles/students.html"
+        },
+        {
+          "title": "GeeksforGeeks Deloitte Placement Preparation",
+          "url": "https://www.geeksforgeeks.org/deloitte-interview-experience/"
+        }
+      ]
+    }
+  }
+}

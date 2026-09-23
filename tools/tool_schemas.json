@@ -1,0 +1,115 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "check_eligibility",
+      "description": "Check whether a student meets the academic eligibility criteria (CGPA cutoff, allowed engineering branches, and maximum active backlog restrictions) for a visiting recruitment company.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string",
+            "description": "Name of the visiting recruiter (e.g., 'Google', 'Microsoft', 'Amazon', 'TCS', 'Infosys', 'Deloitte', 'Flipkart', 'Goldman Sachs', 'Wipro', 'Accenture')."
+          },
+          "cgpa": {
+            "type": "number",
+            "description": "Student's current Cumulative Grade Point Average (CGPA) on a 10.0 scale (e.g., 8.25)."
+          },
+          "branch": {
+            "type": "string",
+            "description": "Student's engineering department/branch.",
+            "enum": [
+              "CSE",
+              "IT",
+              "ECE",
+              "EEE",
+              "ME",
+              "CE"
+            ]
+          },
+          "backlogs": {
+            "type": "integer",
+            "description": "Number of standing/active backlogs or arrears the student currently has. Defaults to 0 if not specified.",
+            "default": 0
+          }
+        },
+        "required": [
+          "company",
+          "cgpa",
+          "branch"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_upcoming_drives",
+      "description": "Retrieve the official schedule of upcoming campus placement drives, with optional filters for student's branch and CGPA to show matching opportunities.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "branch": {
+            "type": "string",
+            "description": "Optional engineering branch filter to view only drives open to this department.",
+            "enum": [
+              "CSE",
+              "IT",
+              "ECE",
+              "EEE",
+              "ME",
+              "CE"
+            ]
+          },
+          "min_cgpa": {
+            "type": "number",
+            "description": "Optional student's CGPA (e.g., 7.5) to filter and retrieve drives where the student meets the minimum CGPA cutoff requirement."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "interview_tips",
+      "description": "Fetch structured interview preparation guides, round-by-round breakdown, common technical/behavioral topics, and recommended study resources for a company or company category.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "company_or_role": {
+            "type": "string",
+            "description": "Target company name ('Google', 'Microsoft', 'Amazon', 'Goldman Sachs', 'TCS', 'Infosys', 'Deloitte') or recruiting sector ('product', 'service', 'consulting', 'startup', 'finance') or job role ('SDE', 'Analyst')."
+          }
+        },
+        "required": [
+          "company_or_role"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "check_application_status",
+      "description": "Track a student's real-time campus placement applications, current hiring stage (e.g., Applied, Shortlisted, Interview Scheduled, Selected), and scheduled next steps using their college student ID.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "student_id": {
+            "type": "string",
+            "description": "The unique college student identification number (e.g., 'STU001', 'STU002', 'STU003', 'STU004', 'STU005', 'STU006')."
+          }
+        },
+        "required": [
+          "student_id"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+]
