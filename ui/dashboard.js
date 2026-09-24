@@ -130,6 +130,52 @@ function toggleNotif() {
   if(el) el.style.display = el.style.display === 'block' ? 'none' : 'block';
 }
 
+// ── Search Logic ──
+function globalSearch(query) {
+  const q = query.toLowerCase().trim();
+  const dropdown = document.getElementById('search-results');
+  
+  if (!dropdown) return;
+  
+  if (!q) {
+    dropdown.style.display = 'none';
+    dropdown.innerHTML = '';
+    return;
+  }
+  
+  const matches = DRIVES.filter(d => 
+    d.company.toLowerCase().includes(q) || 
+    d.role.toLowerCase().includes(q) || 
+    d.type.toLowerCase().includes(q)
+  );
+
+  if (matches.length === 0) {
+    dropdown.innerHTML = `<div class="dropdown-item"><div class="dropdown-text"><p style="color:var(--text-muted)">No matching drives found for "${query}"</p></div></div>`;
+    dropdown.style.display = 'block';
+    return;
+  }
+
+  dropdown.innerHTML = matches.slice(0, 5).map(d => `
+    <div class="dropdown-item" onclick="openPage('drives'); document.getElementById('global-search').value=''; document.getElementById('search-results').style.display='none';">
+      <div class="dropdown-icon" style="background:${d.color};color:#fff;font-size:12px;font-weight:700;">${d.logo}</div>
+      <div class="dropdown-text">
+        <h4 style="font-size:14px;color:var(--text-main);margin-bottom:2px;">${d.company}</h4>
+        <p style="font-size:12px;color:var(--text-muted);">${d.role} • ₹${d.package} LPA</p>
+      </div>
+    </div>
+  `).join('');
+  
+  dropdown.style.display = 'block';
+}
+
+// Close dropdown if clicked outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-box')) {
+    const dropdown = document.getElementById('search-results');
+    if (dropdown) dropdown.style.display = 'none';
+  }
+});
+
 // ── Rendering Functions ──
 function renderStats() {
   const apps = getApplications();

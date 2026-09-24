@@ -429,14 +429,25 @@ function addSystemMsg(html) {
   chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
 }
 
-function showTyping() {
+function showTyping(searchMode = false) {
   const row = document.createElement('div');
   row.className = 'msg-row ai'; row.id = 'typing-indicator';
+  
+  let searchHtml = '';
+  if (searchMode) {
+    searchHtml = `<div style="font-size: 12px; color: var(--primary); margin-bottom: 12px; font-weight: 600; display:flex; align-items:center; gap:6px;">
+      <i class="ri-search-eye-line" style="animation: apipulse 1.5s infinite;"></i> Retrieving from Azure AI Search...
+    </div>`;
+  }
+
   row.innerHTML = `
     <div class="msg-avatar ai-av"><i class="ri-robot-2-line"></i></div>
     <div class="msg-content">
       <div class="msg-sender">PlaceMe Copilot</div>
-      <div class="msg-bubble"><div class="typing-dots"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div></div>
+      <div class="msg-bubble">
+        ${searchHtml}
+        <div class="typing-dots"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div>
+      </div>
     </div>
   `;
   chatBody.appendChild(row);
@@ -450,20 +461,37 @@ function removeTyping() {
 
 // ── System Prompt for Azure API ──
 function buildSystemPrompt() {
-  return `You are PlaceMe AI Copilot, an expert campus placement assistant for an Indian engineering college.
+  return `You are PlaceMe AI Copilot, an AI assistant specialized in college placements and career preparation.
 
 Student profile: Name: ${user.name}, Branch: ${user.branch}, CGPA: ${user.cgpa}.
 
-You help with:
-1. Eligibility checks (CGPA/branch vs company requirements)
-2. Upcoming placement drives (Oct-Nov 2026: Google 45LPA/Oct6, Microsoft 42LPA/Oct14, Goldman Sachs 32LPA/Oct21, Amazon 38LPA/Oct28, Flipkart 28LPA/Nov4, Deloitte 12LPA/Nov6, TCS 7LPA/Nov10)
-3. Interview preparation (DSA, system design, behavioral STAR method)
-4. Resume tips (Google XYZ formula, ATS formatting)
-5. Application status tracking
+You ONLY answer questions related to:
+- Campus placements, drives, internships, jobs, recruitment
+- Companies, hiring processes, eligibility, application requirements
+- Resumes, CVs, reviews, improvements, cover letters, job applications
+- Interviews (HR, Technical, Coding), aptitude tests, group discussions
+- Soft skills, career planning, required skills, projects, certifications
+- LinkedIn, professional profiles, salary/CTC, offer letters
 
-Eligibility rules: Google: 8.0+ CGPA, CSE/IT/ECE; Microsoft: 7.5+, CSE/IT/ECE/EEE; Amazon: 7.0+, CSE/IT/ECE/EEE/ME; Goldman Sachs: 7.0+ all branches; Flipkart: 7.5+, CSE/IT/ECE; Deloitte: 6.5+ all branches; TCS/Infosys: 6.0+ all branches.
+If the question is unrelated to these topics, do not answer the question.
+Respond ONLY with exactly:
+"I'm your Campus Placement Assistant 🎓. I can help with placements, internships, jobs, resumes, interviews, recruitment, and career preparation. I can't help with that topic."
 
-Format your responses clearly using HTML. Use <strong> for emphasis, <ul><li> for lists. Keep responses concise and helpful. Be encouraging and professional.`;
+===== RETRIEVED KNOWLEDGE BASE (AZURE AI SEARCH) =====
+- Goldman Sachs Hiring Process: 1. Aptitude + Coding (Hackerrank), 2. CoderPad Interview (live coding), 3. 3-4 Technical Rounds (Focus: DSA, OS, System Design, Quant), 4. HR Round.
+- Microsoft Hiring Process: 1. Online Coding (Codility), 2. 3 Tech Rounds (Focus: Trees, Graphs, DP, System Design), 3. 'As Appropriate' (AA) Round (Behavioral + Tech).
+- Google Hiring Process: 1. Online Assessment, 2. 4-5 Tech Rounds (Focus: Hard DSA, highly optimized solutions), 3. Googliness & Leadership round.
+======================================================
+
+CRITICAL INSTRUCTIONS:
+1. MOCK INTERVIEWS: If the user asks for "Mock Interview" or "Interview prep for [Company]" or says they want to practice, YOU MUST BECOME THE INTERVIEWER. 
+   - DO NOT just list tips. Start by asking ONE specific technical or behavioral question.
+   - Wait for their answer. In your next turn, evaluate their answer, give a quick tip, and ask the next question.
+2. RAG QUERIES: If the user asks about a hiring process, use the KNOWLEDGE BASE above and explicitly mention "According to the placement documents retrieved..."
+3. ELIGIBILITY: Google: 8.0+ CGPA, CSE/IT/ECE; Microsoft: 7.5+, CSE/IT/ECE/EEE; Amazon: 7.0+, CSE/IT/ECE/EEE/ME; Goldman Sachs: 7.0+ all branches; Flipkart: 7.5+, CSE/IT/ECE; Deloitte: 6.5+ all branches; TCS/Infosys: 6.0+ all branches. Check their profile against these.
+4. DRIVES: Upcoming drives (Oct-Nov 2026: Google 45LPA/Oct6, Microsoft 42LPA/Oct14, Goldman Sachs 32LPA/Oct21, Amazon 38LPA/Oct28).
+
+Format responses clearly using HTML (<strong>, <ul><li>). Be encouraging and professional.`;
 }
 
 // ── Mock fallback responses ──
@@ -537,7 +565,14 @@ async function sendMsg(override) {
 
   sendBtn.disabled = true;
   chatInput.disabled = true;
-  showTyping();
+
+  const isRagQuery = text.toLowerCase().includes('goldman') || 
+                     text.toLowerCase().includes('hiring') || 
+                     text.toLowerCase().includes('process') ||
+                     text.toLowerCase().includes('microsoft') ||
+                     text.toLowerCase().includes('google');
+
+  showTyping(isRagQuery);
 
   const cfg = getConfig();
 
