@@ -231,7 +231,7 @@ function renderHomeDrives() {
         <div class="item-sub">${d.role}</div>
       </div>
       <div class="item-right">
-        <div class="item-title">₹${d.package}</div>
+        <div class="item-title">₹${d.package} LPA</div>
         <div class="item-sub">${d.date}</div>
       </div>
     </div>
